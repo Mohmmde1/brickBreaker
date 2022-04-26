@@ -2,8 +2,8 @@
 
 
 ### Contribution
-1. Create a branch with your name from master branch
-2. Clone the repo to your local machine `git clone https://github.com/Md7tz/Running-Lizard.git`
+1. Create a branch with your name from main branch
+2. Clone the repo to your local machine `git clone https://github.com/Mohmmde1/brickBreaker.git`
 3. Pull the latest changes `git pull`
 4. Switch to your branch with `git branch BranchName` (your branch should have a *)
 6. Add changes to your local repo with `git add .`
@@ -13,8 +13,6 @@
 
 
 > Download [Github Desktop](https://desktop.github.com/ "Github Desktop") for easier workflow
-<!-- > If you have any issues request a tutorial in a google meeting through my email [medhatusama@gmail.com](mailto:medhatusama@gmail.com) -->
-
 
 **Important Notes** 
 * run the same configuration provided in *.vscode* folder for vscode to avoid debugging issues
