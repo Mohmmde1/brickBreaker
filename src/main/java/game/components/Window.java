@@ -32,7 +32,8 @@ public class Window extends JFrame
      */
     public void init() {
         JFrame frame = new JFrame();
-        // Game game = new Game();
+        // TODO Add GameManger
+        // GameManager manager = new GameManager();
 
         frame.setTitle(title);
         frame.setBounds(0, 0, width, height);
