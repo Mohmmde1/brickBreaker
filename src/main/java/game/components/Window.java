@@ -33,13 +33,13 @@ public class Window extends JFrame
     public void init() {
         JFrame frame = new JFrame();
         // TODO Add GameManger
-        // GameManager manager = new GameManager();
+        GameManager manager = new GameManager();
 
         frame.setTitle(title);
         frame.setBounds(0, 0, width, height);
         frame.setResizable(resizeable);
         frame.setDefaultCloseOperation(onCloseOperation);
-        // frame.add(game);
+        frame.add(manager);
         frame.setVisible(visibility);
     }
 
