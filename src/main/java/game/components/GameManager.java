@@ -10,7 +10,9 @@ public class GameManager extends JPanel implements Input
     private boolean isPlaying;
     private Timer timer;
 
-    public GameManager() {}
+    public GameManager() {
+        
+    }
     void paint() {}
 
     @Override
