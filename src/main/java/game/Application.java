@@ -2,18 +2,21 @@ package game;
 
 import javax.swing.JFrame;
 
-import game.components.Input;
-import game.components.Window;
-import game.components.GameManager;
+import GUI.Launcher;
+import GUI.Window;
+
 /**
- * Entrypoint 
+ * Entrypoint
  */
-public class Application 
-{
-    private static Window window;
-    public static void main( String[] args ) 
-    {
-        window = new Window("Brick Breaker v0.1", 800, 600, true, true, JFrame.EXIT_ON_CLOSE);
-        window.initManager();
+public final class Application {
+    public static void main(String[] args) {
+        new Launcher(200, 150);
     }
+
+    public static void start() {
+        gameWindow = new Window("Brick Breaker v0.1", 800, 600, true, true, JFrame.EXIT_ON_CLOSE);
+        gameWindow.initManager();
+    }
+
+    private static Window gameWindow;
 }
