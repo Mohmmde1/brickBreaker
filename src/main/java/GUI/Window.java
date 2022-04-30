@@ -1,6 +1,10 @@
-package game.components;
+package GUI;
 
 import javax.swing.JFrame;
+import java.awt.Toolkit;
+import java.awt.Dimension;
+
+import game.components.GameManager;
 
 public class Window
 {
@@ -17,28 +21,33 @@ public class Window
         this.visibility = visibility;
         this.onCloseOperation = onCloseOperation;
 
-        setWindowProps();
+        setWindowProps(0, 0);
     }
 
     /**
      * Initializes the window frame
      */
-    public void setWindowProps() {
-        frame.setBounds(0, 0, width, height);
+    public void setWindowProps(Integer horizGap, Integer vertGap) {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+        if(horizGap==null) horizGap = 0; int centerX = ((int)screenSize.getWidth() - (horizGap*2) - width) /2;
+        if(vertGap==null) vertGap   = 0; int centerY = ((int)screenSize.getHeight() - (vertGap*2) - height) /2;
+
+        frame.setBounds(centerX, centerY, width, height);
         frame.setResizable(resizeable);
         frame.setDefaultCloseOperation(onCloseOperation);
         frame.setVisible(visibility);
     }
 
     /**
-     * Add a manager
+     * Adds a game manager
      */
     public void initManager() {
         GameManager manager = new GameManager();
         frame.add(manager);
     }
 
-    JFrame frame;
+    protected JFrame frame;
     private int width  = 800; 
     private int height = 600;
     private boolean resizeable = true;
