@@ -1,17 +1,17 @@
-package game.components;
+// package game.components;
 
-import game.components.GameObject;
+// import game.components.GameObject;
 
-public class Brick extends GameObject{
-    // hittalbe type var
-    // hittalbe type;
-    int strength;
+// public class Brick extends GameObject{
+//     // hittalbe type var
+//     // hittalbe type;
+//     int strength;
 
-    Brick() {
+//     Brick() {
 
-    }
+//     }
 
-    void hit() {
-    // TODO Auto-generated method stub
-    }
-}
+//     void hit() {
+//     // TODO Auto-generated method stub
+//     }
+// }

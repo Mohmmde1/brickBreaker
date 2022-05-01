@@ -1,6 +1,7 @@
 package game;
 
 import javax.swing.JFrame;
+import java.awt.Dimension;
 
 import GUI.Launcher;
 import GUI.Window;
@@ -10,11 +11,11 @@ import GUI.Window;
  */
 public final class Application {
     public static void main(String[] args) {
-        new Launcher(200, 150);
+        new Launcher(new Dimension(200, 150));
     }
 
     public static void start() {
-        gameWindow = new Window("Brick Breaker v0.1", 800, 600, true, true, JFrame.EXIT_ON_CLOSE);
+        gameWindow = new Window("Brick Breaker v0.1", new Dimension(900, 600), true, true, JFrame.EXIT_ON_CLOSE);
         gameWindow.initManager();
     }
 
