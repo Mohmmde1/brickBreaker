@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.awt.Color;
 public class Projectile extends GameObject
 {
-    public static int dispX = 1;
-    public static int dispY = 1;
+    public int dispX = 1;
+    public int dispY = 1;
     public final static int yOffset = 20;
     public final static int xOffset = 25;
     public static boolean isIdle = true;

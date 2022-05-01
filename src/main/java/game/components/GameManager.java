@@ -61,8 +61,8 @@ public class GameManager extends JPanel implements Input
         if(isPlaying) { 
             repaint();
             ball.update();
-            if(ball.x >= Window.dimension.width - ball.width / 2 || ball.x <= 0) { Projectile.dispX = -Projectile.dispX; }
-            else if(ball.y <= 0)  Projectile.dispY = -Projectile.dispY;
+            if(ball.x >= Window.dimension.width - ball.width || ball.x <= 0) { ball.dispX = -ball.dispX; }
+            else if(ball.y <= 0)  ball.dispY = -ball.dispY;
             repaint();
         }
     }
