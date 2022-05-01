@@ -1,19 +1,26 @@
 package utils;
 
 import game.Player;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
-// import org.json.simple.JSONArray;
+import java.awt.Dimension;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.PrintWriter;
+import java.util.Map;
+import java.util.LinkedHashMap;
+
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
+
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+// import org.json.simple.JSONArray;
 
 @SuppressWarnings("unchecked")
 public final class Config
 {
     public static final String filename = "config.json";
-    private static final int EXIT_ON_CLOSE = 3;
     private static Map<String, Object> windowProps;
     private static Map<String, Object> playerInfo;
     /**
@@ -31,7 +38,7 @@ public final class Config
         playerInfo = new LinkedHashMap<String, Object>(3);
 
         windowProps.put("title", "Block Breaker Reloaded");
-        windowProps.put("width", 800);
+        windowProps.put("width", 900);
         windowProps.put("height", 600);
         windowProps.put("resizable", true);
         windowProps.put("visibility", true);
@@ -49,6 +56,24 @@ public final class Config
         pw.flush();
         pw.close();
     } 
+
+    /**
+     * @return Dimension
+     * @throws IOException
+     * @throws org.json.simple.parser.ParseException
+     */
+    public static Dimension getWindowDimension() throws IOException, org.json.simple.parser.ParseException {
+        // Parse json file
+        Object obj = new JSONParser().parse(new FileReader(filename));
+
+        // Cast to json object
+        JSONObject json = (JSONObject) obj;
+
+        // Get Window properties
+        windowProps = ((Map<String, Object>)json.get("WindowProperties"));
+
+        return new Dimension((int)(long)windowProps.get("width"), (int)(long)windowProps.get("height"));
+    }
 
     private static void updatePlayer(boolean update) {
         if (update) {

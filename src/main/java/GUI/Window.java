@@ -30,7 +30,7 @@ public class Window
     public void setWindowProps(Integer horizGap, Integer vertGap) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-        if(horizGap==null) horizGap = 0; centerX = ((int)screenSize.getWidth() - (horizGap*2) - dimension.width) /2;
+        if(horizGap==null) horizGap = 0; centerX = ((int)screenSize.getWidth() - (horizGap*2) - 100 - dimension.width) /2;
         if(vertGap==null) vertGap   = 0; centerY = ((int)screenSize.getHeight() - (vertGap*2) - dimension.height) /2;
 
         frame.setBounds(centerX, centerY, dimension.width, dimension.height);
@@ -45,14 +45,12 @@ public class Window
     /**
      * Adds a game manager
      */
-    public void initManager() {
-        frame.add(new GameManager());
-    }
+    public void initManager() { frame.add(new GameManager()); }
 
     protected JFrame frame;
     private int centerX = 0; 
     private int centerY = 0; 
-    private static Dimension dimension = new Dimension(800, 600);
+    private static Dimension dimension = new Dimension(900, 600);
     private boolean resizeable = true;
     private boolean visibility = true;
     private int onCloseOperation = JFrame.EXIT_ON_CLOSE;

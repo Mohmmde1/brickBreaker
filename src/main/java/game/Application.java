@@ -1,10 +1,15 @@
 package game;
 
 import javax.swing.JFrame;
+
+import org.json.simple.parser.ParseException;
+import java.io.IOException;
+
 import java.awt.Dimension;
 
 import GUI.Launcher;
 import GUI.Window;
+import utils.Config;
 
 /**
  * Entrypoint
@@ -14,8 +19,8 @@ public final class Application {
         new Launcher(new Dimension(200, 150));
     }
 
-    public static void start() {
-        gameWindow = new Window("Brick Breaker v0.1", new Dimension(900, 600), true, true, JFrame.EXIT_ON_CLOSE);
+    public static void start() throws IOException, ParseException {
+        gameWindow = new Window("Brick Breaker v0.1", Config.getWindowDimension(), true, true, JFrame.EXIT_ON_CLOSE);
         gameWindow.initManager();
     }
 
