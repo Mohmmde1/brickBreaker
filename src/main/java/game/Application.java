@@ -18,7 +18,7 @@ public final class Application {
     public static void main(String[] args) { new Launcher(new Dimension(200, 150)); }
 
     public static void start() throws IOException, ParseException {
-        gameWindow = new Window("Brick Breaker " + Config.getVersion(), Config.getWindowDimension(), true, true, JFrame.EXIT_ON_CLOSE);
+        gameWindow = new Window(Config.title() + " v" + Config.getVersion(), Config.getWindowDimension(), Config.resizable(), true, JFrame.EXIT_ON_CLOSE);
         gameWindow.initManager();
     }
 

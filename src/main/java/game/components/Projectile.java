@@ -1,9 +1,11 @@
 package game.components;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.Point;
 import java.awt.Dimension;
 import java.io.IOException;
+
 import java.awt.Color;
 public class Projectile extends GameObject
 {
@@ -26,7 +28,7 @@ public class Projectile extends GameObject
      */
     public void draw(Graphics g) throws IOException {
         g.setColor(Color.RED);
-        g.drawImage(loadBufferedImage("ball.png"), x, y+10, dimension.width, dimension.height, null); 
+        g.drawImage(loadBufferedImage("ball.png"), x, y + width, dimension.width, dimension.height, null); 
     }
 
     /**
@@ -48,6 +50,40 @@ public class Projectile extends GameObject
             x += dispX;
             y += dispY;
         }
+    }
+
+    /**
+     * Determines whether or not this {@code Rectangle} and the specified
+     * {@code Rectangle} intersect. Two rectangles intersect if
+     * their intersection is nonempty.
+     *
+     * @param r the specified {@code Rectangle}
+     * @return    {@code true} if the specified {@code Rectangle}
+     *            and this {@code Rectangle} intersect;
+     *            {@code false} otherwise.
+     */
+    @Override
+    public boolean intersects(Rectangle r) {
+        int tw = this.width;
+        int th = this.height;
+        int rw = r.width;
+        int rh = r.height;
+        if (rw <= 0 || rh <= 0 || tw <= 0 || th <= 0) {
+            return false;
+        }
+        int tx = this.x;
+        int ty = this.y;
+        int rx = r.x;
+        int ry = r.y - this.width;
+        rw += rx;
+        rh += ry;
+        tw += tx;
+        th += ty;
+        //      overflow || intersect
+        return ((rw < rx || rw > tx) &&
+                (rh < ry || rh > ty) &&
+                (tw < tx || tw > rx) &&
+                (th < ty || th > ry));
     }
 
     // public void hit(){

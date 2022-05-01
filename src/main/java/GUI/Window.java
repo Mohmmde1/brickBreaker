@@ -64,7 +64,7 @@ public class Window
 
     private static int centerX = 0; 
     private static int centerY = 0; 
-    private boolean resizeable = true;
+    private boolean resizeable = false;
     private boolean visibility = true;
     private int onCloseOperation = JFrame.EXIT_ON_CLOSE;
 }
