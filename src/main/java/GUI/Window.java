@@ -45,14 +45,12 @@ public class Window
     /**
      * Adds a game manager
      */
-    public void initManager() {
-        frame.add(new GameManager());
-    }
+    public void initManager() { frame.add(new GameManager()); }
 
     protected JFrame frame;
     private int centerX = 0; 
     private int centerY = 0; 
-    private static Dimension dimension = new Dimension(800, 600);
+    private static Dimension dimension = new Dimension(900, 600);
     private boolean resizeable = true;
     private boolean visibility = true;
     private int onCloseOperation = JFrame.EXIT_ON_CLOSE;
