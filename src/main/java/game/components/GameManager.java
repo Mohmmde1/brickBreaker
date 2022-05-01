@@ -50,14 +50,10 @@ public class GameManager extends JPanel implements Input
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-        System.out.println("GameManager.keyTyped()");
-    }
+    public void keyTyped(KeyEvent e) { System.out.println("GameManager.keyTyped()"); }
 
     @Override
-    public void keyReleased(KeyEvent e) {
-        System.out.println("GameManager.keyReleased()");
-    }
+    public void keyReleased(KeyEvent e) { System.out.println("GameManager.keyReleased()"); }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -65,7 +61,7 @@ public class GameManager extends JPanel implements Input
         if(isPlaying) { 
             repaint();
             ball.update();
-            if(ball.x >= Window.dimension.width || ball.x <= 0) { Projectile.dispX = -Projectile.dispX; }
+            if(ball.x >= Window.dimension.width - ball.width / 2 || ball.x <= 0) { Projectile.dispX = -Projectile.dispX; }
             else if(ball.y <= 0)  Projectile.dispY = -Projectile.dispY;
             repaint();
         }
