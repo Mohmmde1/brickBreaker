@@ -10,7 +10,7 @@ import java.awt.Point;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-
+import java.awt.Rectangle;
 import java.io.IOException;
 
 public class GameManager extends JPanel implements Input
@@ -62,7 +62,7 @@ public class GameManager extends JPanel implements Input
             repaint();
             ball.update();
             if(ball.x >= Window.dimension.width - ball.width || ball.x <= 0) { ball.dispX = -ball.dispX; }
-            else if(ball.y <= 0)  ball.dispY = -ball.dispY;
+            else if(ball.y <= 0 || (ball.intersects(paddle))) ball.dispY = -ball.dispY;
             repaint();
         }
     }

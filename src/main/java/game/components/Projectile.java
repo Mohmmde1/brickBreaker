@@ -35,8 +35,8 @@ public class Projectile extends GameObject
     public void randomize() {
         int max = 4;
         int min = -4;
-        dispX = (int)Math.floor (Math.random()*(max-min+1)+min);
-        dispY = (int)Math.floor(Math.random()*((max=-2)-min+1)+min);
+        dispX = (int) Math.random() * (max - min + 1) + min;
+        dispY = (int) Math.random() * ((max=-2) - min + 1) + min;
         isIdle = false;
     }
 
