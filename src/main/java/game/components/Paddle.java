@@ -22,11 +22,11 @@ public class Paddle extends GameObject
      */
     public void move(Direction direction) {
         if (Direction.LEFT == direction) {
-            if (x - displacement > 0 )
+            if (x - displacement >= 0 )
                 x -= displacement;
         } 
         else if (Direction.RIGHT == direction) {
-            if ((x + width + displacement) < Window.getWidth()) 
+            if ((x + width + displacement) <= Window.getWidth()) 
                 x += displacement;
         }
     }

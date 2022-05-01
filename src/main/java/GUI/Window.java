@@ -30,7 +30,7 @@ public class Window
     public void setWindowProps(Integer horizGap, Integer vertGap) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-        if(horizGap==null) horizGap = 0; centerX = ((int)screenSize.getWidth() - (horizGap*2) - dimension.width) /2;
+        if(horizGap==null) horizGap = 0; centerX = ((int)screenSize.getWidth() - (horizGap*2) - 100 - dimension.width) /2;
         if(vertGap==null) vertGap   = 0; centerY = ((int)screenSize.getHeight() - (vertGap*2) - dimension.height) /2;
 
         frame.setBounds(centerX, centerY, dimension.width, dimension.height);
