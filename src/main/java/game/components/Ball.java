@@ -1,16 +1,16 @@
-package game.components;
+// package game.components;
 
-import game.components.GameObject;
+// import game.components.GameObject;
 
-public class Ball extends GameObject{
+// public class Ball extends GameObject{
     
-    private float speed;
+//     private float speed;
 
-    Ball() {
+//     Ball() {
+        
+//     }
 
-    }
-
-    public void hit(){
-    // TODO Auto-generated method stub
-    }
-}
+//     public void hit(){
+//     // TODO Auto-generated method stub
+//     }
+// }

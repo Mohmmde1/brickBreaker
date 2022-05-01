@@ -43,13 +43,12 @@ public class Window
      * Adds a game manager
      */
     public void initManager() {
-        GameManager manager = new GameManager();
-        frame.add(manager);
+        frame.add(new GameManager());
     }
 
     protected JFrame frame;
-    private int width  = 800; 
-    private int height = 600;
+    public static int width  = 800; 
+    public static int height = 600;
     private boolean resizeable = true;
     private boolean visibility = true;
     private int onCloseOperation = JFrame.EXIT_ON_CLOSE;
