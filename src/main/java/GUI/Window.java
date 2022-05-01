@@ -15,8 +15,8 @@ public class Window
 
     public Window(String title, int width, int height, boolean resizeable, boolean visibility, int onCloseOperation) {
         this(title);
-        this.width = width;
-        this.height = height;
+        Window.width = width;
+        Window.height = height;
         this.resizeable = resizeable;
         this.visibility = visibility;
         this.onCloseOperation = onCloseOperation;
@@ -39,6 +39,9 @@ public class Window
         frame.setVisible(visibility);
     }
 
+    public static int getWidth() { return width;}
+    public static int getHeight() { return height;}
+
     /**
      * Adds a game manager
      */
@@ -47,8 +50,8 @@ public class Window
     }
 
     protected JFrame frame;
-    public static int width  = 800; 
-    public static int height = 600;
+    private static int width  = 810; 
+    private static int height = 600;
     private boolean resizeable = true;
     private boolean visibility = true;
     private int onCloseOperation = JFrame.EXIT_ON_CLOSE;

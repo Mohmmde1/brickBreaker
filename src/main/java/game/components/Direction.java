@@ -3,7 +3,7 @@ package game.components;
 /**
  * enumerator for directions
  */
-enum Dir {
+enum Direction {
   LEFT,
   RIGHT,
   UP,

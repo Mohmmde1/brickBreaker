@@ -1,21 +1,31 @@
 package game.components;
 
+import java.awt.Rectangle;
 import java.awt.Point;
+import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
-public class GameObject extends Rectangle {
-     public Point point;
+import java.io.File;
+import java.io.IOException;
 
-     GameObject(Point point, int width, int height) {
-          super(point.x, point.y, width, height);
+public class GameObject extends Rectangle 
+{
+     protected final String ASSETS_DIR = "Assets/";
+     protected Point point;
+     protected Dimension dimension;
+
+     GameObject(Point point, Dimension dimension) {
+          super(point, dimension);
           this.point = point;
+          this.dimension = dimension;
      }
 
-     GameObject(Point point){
-          this(point, 10, 10);
+     protected final BufferedImage loadBufferedImage(String filename) throws IOException {
+          return ImageIO.read(new File(ASSETS_DIR, "img/" + filename));
      }
 
      // public void draw(Graphics g) {
