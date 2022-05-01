@@ -62,7 +62,7 @@ public final class Config
      * @throws IOException
      * @throws org.json.simple.parser.ParseException
      */
-    public static Dimension getWindowDimension() throws IOException, org.json.simple.parser.ParseException {
+    public final static Dimension getWindowDimension() throws IOException, org.json.simple.parser.ParseException {
         // Parse json file
         Object obj = new JSONParser().parse(new FileReader(filename));
 
@@ -73,6 +73,21 @@ public final class Config
         windowProps = ((Map<String, Object>)json.get("WindowProperties"));
 
         return new Dimension((int)(long)windowProps.get("width"), (int)(long)windowProps.get("height"));
+    }
+
+    /**
+     * @return String
+     * @throws IOException
+     * @throws org.json.simple.parser.ParseException
+     */
+    public final static String getVersion() throws IOException, org.json.simple.parser.ParseException {
+        // Parse json file
+        Object obj = new JSONParser().parse(new FileReader(filename));
+
+        // Cast to json object
+        JSONObject json = (JSONObject) obj;
+
+        return Double.toString((double)json.get("version"));
     }
 
     private static void updatePlayer(boolean update) {

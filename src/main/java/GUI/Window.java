@@ -8,11 +8,24 @@ import game.components.GameManager;
 
 public class Window
 {
+    protected JFrame frame;
+    public static Dimension dimension = new Dimension(900, 600);
+    
+    /**
+     * @param title
+     */
     public Window(String title) {
         frame = new JFrame();
         frame.setTitle(title);
     }
 
+    /**
+     * @param title
+     * @param dimension
+     * @param resizeable
+     * @param visibility
+     * @param onCloseOperation
+     */
     public Window(String title, Dimension dimension, boolean resizeable, boolean visibility, int onCloseOperation) {
         this(title);
         Window.dimension.width = dimension.width;
@@ -26,6 +39,8 @@ public class Window
 
     /**
      * Initializes the window frame
+     * @param horizGap
+     * @param vertGap
      */
     public void setWindowProps(Integer horizGap, Integer vertGap) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -47,10 +62,8 @@ public class Window
      */
     public void initManager() { frame.add(new GameManager()); }
 
-    protected JFrame frame;
-    private int centerX = 0; 
-    private int centerY = 0; 
-    private static Dimension dimension = new Dimension(900, 600);
+    private static int centerX = 0; 
+    private static int centerY = 0; 
     private boolean resizeable = true;
     private boolean visibility = true;
     private int onCloseOperation = JFrame.EXIT_ON_CLOSE;

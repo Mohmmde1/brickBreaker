@@ -12,7 +12,8 @@ import java.io.IOException;
 public class Paddle extends GameObject
 {
     public static int displacement = 30;
-    public static int offset = 50;
+    public static int yOffset = 50;
+    public static int xOffset = 30;
 
     Paddle(Point point, Dimension dimension) { super(point, dimension); }
 
