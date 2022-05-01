@@ -1,6 +1,7 @@
 package GUI;
 
 import java.io.FileNotFoundException;
+import java.awt.Dimension;
 
 import javax.swing.*;
 
@@ -10,8 +11,8 @@ import utils.Config;
 
 public class Launcher extends Window {
 
-    public Launcher(int width, int height) {
-        super("Brick Breaker Game Launcher", width, height, false, true, JFrame.EXIT_ON_CLOSE);
+    public Launcher(Dimension dimension) {
+        super("Brick Breaker Game Launcher", dimension, false, true, JFrame.EXIT_ON_CLOSE);
         setWindowProps(horizGap, vertGap);
         initComponents();
     }

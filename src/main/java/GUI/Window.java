@@ -13,10 +13,10 @@ public class Window
         frame.setTitle(title);
     }
 
-    public Window(String title, int width, int height, boolean resizeable, boolean visibility, int onCloseOperation) {
+    public Window(String title, Dimension dimension, boolean resizeable, boolean visibility, int onCloseOperation) {
         this(title);
-        Window.width = width;
-        Window.height = height;
+        Window.dimension.width = dimension.width;
+        Window.dimension.height = dimension.height;
         this.resizeable = resizeable;
         this.visibility = visibility;
         this.onCloseOperation = onCloseOperation;
@@ -30,17 +30,17 @@ public class Window
     public void setWindowProps(Integer horizGap, Integer vertGap) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-        if(horizGap==null) horizGap = 0; int centerX = ((int)screenSize.getWidth() - (horizGap*2) - width) /2;
-        if(vertGap==null) vertGap   = 0; int centerY = ((int)screenSize.getHeight() - (vertGap*2) - height) /2;
+        if(horizGap==null) horizGap = 0; centerX = ((int)screenSize.getWidth() - (horizGap*2) - dimension.width) /2;
+        if(vertGap==null) vertGap   = 0; centerY = ((int)screenSize.getHeight() - (vertGap*2) - dimension.height) /2;
 
-        frame.setBounds(centerX, centerY, width, height);
+        frame.setBounds(centerX, centerY, dimension.width, dimension.height);
         frame.setResizable(resizeable);
         frame.setDefaultCloseOperation(onCloseOperation);
         frame.setVisible(visibility);
     }
 
-    public static int getWidth() { return width;}
-    public static int getHeight() { return height;}
+    public static int getWidth() { return dimension.width;}
+    public static int getHeight() { return dimension.height;}
 
     /**
      * Adds a game manager
@@ -50,8 +50,9 @@ public class Window
     }
 
     protected JFrame frame;
-    private static int width  = 810; 
-    private static int height = 600;
+    private int centerX = 0; 
+    private int centerY = 0; 
+    private static Dimension dimension = new Dimension(800, 600);
     private boolean resizeable = true;
     private boolean visibility = true;
     private int onCloseOperation = JFrame.EXIT_ON_CLOSE;
