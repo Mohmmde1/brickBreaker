@@ -37,10 +37,10 @@ public final class Config
         windowProps = new LinkedHashMap<String, Object>(6);
         playerInfo = new LinkedHashMap<String, Object>(3);
 
-        windowProps.put("title", "Block Breaker Reloaded");
+        windowProps.put("title", "Brick Breaker");
         windowProps.put("width", 900);
         windowProps.put("height", 600);
-        windowProps.put("resizable", true);
+        windowProps.put("resizable", false);
         windowProps.put("visibility", true);
         windowProps.put("OnClose", EXIT_ON_CLOSE);
         
@@ -62,7 +62,7 @@ public final class Config
      * @throws IOException
      * @throws org.json.simple.parser.ParseException
      */
-    public static Dimension getWindowDimension() throws IOException, org.json.simple.parser.ParseException {
+    public final static Dimension getWindowDimension() throws IOException, org.json.simple.parser.ParseException {
         // Parse json file
         Object obj = new JSONParser().parse(new FileReader(filename));
 
@@ -73,6 +73,57 @@ public final class Config
         windowProps = ((Map<String, Object>)json.get("WindowProperties"));
 
         return new Dimension((int)(long)windowProps.get("width"), (int)(long)windowProps.get("height"));
+    }
+
+    /**
+     * @return boolean
+     * @throws IOException
+     * @throws org.json.simple.parser.ParseException
+     */
+    public final static boolean resizable() throws IOException, org.json.simple.parser.ParseException {
+        // Parse json file
+        Object obj = new JSONParser().parse(new FileReader(filename));
+
+        // Cast to json object
+        JSONObject json = (JSONObject) obj;
+
+        // Get Window properties
+        windowProps = ((Map<String, Object>)json.get("WindowProperties"));
+
+        return (boolean)windowProps.get("resizable");
+    }
+
+    /**
+     * @return boolean
+     * @throws IOException
+     * @throws org.json.simple.parser.ParseException
+     */
+    public final static String title() throws IOException, org.json.simple.parser.ParseException {
+        // Parse json file
+        Object obj = new JSONParser().parse(new FileReader(filename));
+
+        // Cast to json object
+        JSONObject json = (JSONObject) obj;
+
+        // Get Window properties
+        windowProps = ((Map<String, Object>)json.get("WindowProperties"));
+
+        return (String)windowProps.get("title");
+    }
+
+    /**
+     * @return String
+     * @throws IOException
+     * @throws org.json.simple.parser.ParseException
+     */
+    public final static String getVersion() throws IOException, org.json.simple.parser.ParseException {
+        // Parse json file
+        Object obj = new JSONParser().parse(new FileReader(filename));
+
+        // Cast to json object
+        JSONObject json = (JSONObject) obj;
+
+        return Double.toString((double)json.get("version"));
     }
 
     private static void updatePlayer(boolean update) {
