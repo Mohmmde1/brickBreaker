@@ -22,7 +22,7 @@ public class GameManager extends JPanel implements Input
         setFocusTraversalKeysEnabled(false);
 
         timer = new Timer(delay, this);
-		timer.start(); // Sends action events
+	timer.start(); // Sends action events
     }
 
     public void paint(Graphics g) {
@@ -71,11 +71,7 @@ public class GameManager extends JPanel implements Input
             }
             if(ball.x > Window.dimension.width - (ball.width * 2) || ball.x <= 0) { ball.dispX = -ball.dispX; }
             else if (ball.y <= 0 - ball.height || (ball.intersects(paddle))) ball.dispY = -ball.dispY;
-            else if (ball.y > Window.dimension.height) {
-                Projectile.isIdle = true;
-                ball.x = paddle.x + Projectile.xOffset;
-                ball.y = paddle.y + Projectile.yOffset;
-            }
+            else if (ball.y > Window.dimension.height) Projectile.isIdle = true;
             repaint();
         }
     }
