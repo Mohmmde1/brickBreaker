@@ -24,3 +24,6 @@ hs_err_pid*
 
 # Config file
 config.json
+
+# Secrets
+.env
