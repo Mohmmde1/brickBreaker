@@ -85,8 +85,4 @@ public class Projectile extends GameObject
                 (tw < tx || tw > rx) &&
                 (th < ty || th > ry));
     }
-
-    // public void hit(){
-    // // TODO Auto-generated method stub
-    // }
 }

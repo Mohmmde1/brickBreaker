@@ -6,11 +6,10 @@ import java.awt.Dimension;
 
 import game.components.GameManager;
 
-public class Window
-{
+public class Window {
     protected JFrame frame;
     public static Dimension dimension = new Dimension(900, 600);
-    
+
     /**
      * @param title
      */
@@ -37,16 +36,41 @@ public class Window
         setWindowProps(0, 0);
     }
 
+     /**
+     * this constructor is only used in the development process
+     * @param title
+     * @param dimension
+     * @param resizeable
+     * @param visibility
+     * @param onCloseOperation
+     */
+    public Window() {
+        this("Brick Breaker Game");
+        Window.dimension.width = 900;
+        Window.dimension.height = 600;
+        this.resizeable = false;
+        this.visibility = true;
+        this.onCloseOperation = JFrame.EXIT_ON_CLOSE;
+
+        initManager();
+        setWindowProps(0, 0);
+    }
+
     /**
      * Initializes the window frame
+     * 
      * @param horizGap
      * @param vertGap
      */
     public void setWindowProps(Integer horizGap, Integer vertGap) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-        if(horizGap==null) horizGap = 0; centerX = ((int)screenSize.getWidth() - (horizGap*2) - 100 - dimension.width) /2;
-        if(vertGap==null) vertGap   = 0; centerY = ((int)screenSize.getHeight() - (vertGap*2) - dimension.height) /2;
+        if (horizGap == null)
+            horizGap = 0;
+        centerX = ((int) screenSize.getWidth() - (horizGap * 2) - 100 - dimension.width) / 2;
+        if (vertGap == null)
+            vertGap = 0;
+        centerY = ((int) screenSize.getHeight() - (vertGap * 2) - dimension.height) / 2;
 
         frame.setBounds(centerX, centerY, dimension.width, dimension.height);
         frame.setResizable(resizeable);
@@ -54,16 +78,23 @@ public class Window
         frame.setVisible(visibility);
     }
 
-    public static int getWidth() { return dimension.width;}
-    public static int getHeight() { return dimension.height;}
+    public static int getWidth() {
+        return dimension.width;
+    }
+
+    public static int getHeight() {
+        return dimension.height;
+    }
 
     /**
      * Adds a game manager
      */
-    public void initManager() { frame.add(new GameManager()); }
+    public void initManager() {
+        frame.add(new GameManager());
+    }
 
-    private static int centerX = 0; 
-    private static int centerY = 0; 
+    private static int centerX = 0;
+    private static int centerY = 0;
     private boolean resizeable = false;
     private boolean visibility = true;
     private int onCloseOperation = JFrame.EXIT_ON_CLOSE;
