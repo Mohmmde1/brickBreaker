@@ -16,18 +16,19 @@ import utils.Config;
  */
 public final class Application {
     public static void main(String[] args) throws IOException, ParseException {
-        // new Launcher(new Dimension(200, 150));
-        devStart();
-    }
-
-    public static void start() throws IOException, ParseException {
-        gameWindow = new Window(Config.title() + " v" + Config.getVersion(), Config.getWindowDimension(),
-                Config.resizable(), true, JFrame.EXIT_ON_CLOSE);
+        String env = (String) Config.dotenv.get("APP_ENV");
+        if (env.equalsIgnoreCase("production")) {
+            new Launcher(new Dimension(200, 150));
+            return;
+        }
+        gameWindow = new Window();
         gameWindow.initManager();
     }
 
-    public static void devStart() {
-        gameWindow = new Window();
+    public static void start() throws IOException, ParseException {
+        gameWindow = new Window(Config.title() + " v" + Config.getVersion(), Config.getWindowDimension(), Config.resizable(), true, JFrame.EXIT_ON_CLOSE);
+        gameWindow.initManager();
     }
+    
     private static Window gameWindow;
 }

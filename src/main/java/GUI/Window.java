@@ -18,6 +18,11 @@ public class Window {
         frame.setTitle(title);
     }
 
+    public Window() {
+        this("Brick Breaker");
+        setWindowProps(0, 0);
+    }
+
     /**
      * @param title
      * @param dimension
@@ -33,26 +38,6 @@ public class Window {
         this.visibility = visibility;
         this.onCloseOperation = onCloseOperation;
 
-        setWindowProps(0, 0);
-    }
-
-     /**
-     * this constructor is only used in the development process
-     * @param title
-     * @param dimension
-     * @param resizeable
-     * @param visibility
-     * @param onCloseOperation
-     */
-    public Window() {
-        this("Brick Breaker Game");
-        Window.dimension.width = 900;
-        Window.dimension.height = 600;
-        this.resizeable = false;
-        this.visibility = true;
-        this.onCloseOperation = JFrame.EXIT_ON_CLOSE;
-
-        initManager();
         setWindowProps(0, 0);
     }
 
@@ -75,23 +60,16 @@ public class Window {
         frame.setBounds(centerX, centerY, dimension.width, dimension.height);
         frame.setResizable(resizeable);
         frame.setDefaultCloseOperation(onCloseOperation);
+        if (this.getClass().getName() == "GUI.Window") { initManager(); };
         frame.setVisible(visibility);
-    }
-
-    public static int getWidth() {
-        return dimension.width;
-    }
-
-    public static int getHeight() {
-        return dimension.height;
     }
 
     /**
      * Adds a game manager
      */
-    public void initManager() {
-        frame.add(new GameManager());
-    }
+    public void initManager() { frame.add(new GameManager()); }
+    public static int getWidth() { return dimension.width; }
+    public static int getHeight() { return dimension.height; }
 
     private static int centerX = 0;
     private static int centerY = 0;
