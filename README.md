@@ -1,5 +1,19 @@
 # brickBreaker
 
+## Environment Setup
+- step 1 (create .env)
+```bash
+cp env.template .env
+```
+
+- step 2 (edit .env)
+```text
+# development or production
+APP_ENV=development
+
+# Project absolute path
+BASE_DIR=c:/project-path
+```
 
 ## Contribution workflow
 ```
