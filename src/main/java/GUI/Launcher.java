@@ -2,9 +2,10 @@ package GUI;
 
 import game.Application;
 import game.Player;
-import utils.Config;
+import network.Firebase;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
@@ -33,7 +34,7 @@ public class Launcher extends Window
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
                     OnLaunch(evt);
-                } catch (IOException | ParseException e) {
+                } catch (IOException | ParseException | InterruptedException | ExecutionException e) {
                     e.printStackTrace();
                 }
             }
@@ -86,15 +87,16 @@ public class Launcher extends Window
      *   This is the called to perform an action onSubmit
      * @throws ParseException
      * @throws IOException
+     * @throws ExecutionException
+     * @throws InterruptedException
      */
-    private void OnLaunch(java.awt.event.ActionEvent evt) throws IOException, ParseException {
-        String name = nickname.getText();
-        if("".equals(name)){
+    private void OnLaunch(java.awt.event.ActionEvent evt) throws IOException, ParseException, InterruptedException, ExecutionException {
+        Player.name = nickname.getText();
+        if("".equals(Player.name)) {
             JOptionPane.showMessageDialog(frame, "Enter a nickname", "Missing player information", JOptionPane.ERROR_MESSAGE);
-        }else{
+        } else {
             frame.dispose();
-            Player.name = name;
-            Config.writeJson(true);
+            if (Firebase.initialize()) { Firebase.uploadPlayerInfo(); }
             Application.start();
         }
     }
