@@ -5,12 +5,13 @@ import java.awt.Rectangle;
 import java.awt.Point;
 import java.awt.Dimension;
 import java.io.IOException;
+import java.util.Random;
 
 import java.awt.Color;
 public class Projectile extends GameObject
 {
-    public int dispX = 1;
-    public int dispY = 1;
+    public int dispX = 0;
+    public int dispY = 5;
     public final static int yOffset = 20;
     public final static int xOffset = 25;
     public static boolean isIdle = true;
@@ -35,10 +36,13 @@ public class Projectile extends GameObject
      * Randomizes the initial direction of the projectile
      */
     public void randomize() {
-        int max = 4;
-        int min = -4;
-        dispX = (int) Math.random() * (max - min + 1) + min;
-        dispY = (int) Math.random() * ((max=-2) - min + 1) + min;
+        int max = 5;
+        int min = -5;
+
+        while(dispX == 0) {
+            dispX = new Random().nextInt(max - min) + min;
+        }
+        
         isIdle = false;
     }
 
