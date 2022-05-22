@@ -9,17 +9,13 @@ import java.awt.Dimension;
 public class Bricks {
 
     private Vector<Brick> bricks = new Vector<Brick>();
-    private String pattren = "Random";
-    private int startX = 100;
+    private int startX = 200;
     private int startY = 50;
     private int brickWidth = 50;
     private int brickHeight = 20;
     private int brickCount = 10;
 
-    Bricks(String pattren){
-        this.pattren = pattren; 
-        populate();
-    }
+
     Bricks(){
         populate();
     }
