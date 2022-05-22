@@ -23,7 +23,7 @@ public class GameManager extends JPanel implements Input
         setFocusTraversalKeysEnabled(false);
 
         timer = new Timer(delay, this);
-	timer.start(); // Sends action events
+	    timer.start(); // Sends action events
     }
 
     public void paint(Graphics g) {
@@ -88,7 +88,7 @@ public class GameManager extends JPanel implements Input
         repaint(paddle.x, paddle.y, paddle.width, paddle.height);
     }
 
-    private final int delay = 10;
+    private final int delay = 5;
     private boolean isPlaying = false;
     private Timer timer;
     private Paddle paddle; 
