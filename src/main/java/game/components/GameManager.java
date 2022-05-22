@@ -17,6 +17,7 @@ public class GameManager extends JPanel implements Input
     public GameManager() {
         paddle = new Paddle(new Point(Window.getWidth() / 2 - Paddle.xOffset, Window.getHeight() - Paddle.yOffset), new Dimension(60, 10));
         ball = new Projectile(new Point(paddle.x + Projectile.xOffset , paddle.y - Projectile.yOffset), new Dimension(10, 10));
+        bricks = new Bricks();
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
@@ -31,6 +32,7 @@ public class GameManager extends JPanel implements Input
 
         try { paddle.draw(graphics); } catch (IOException e) { e.printStackTrace(); }
         try { ball.draw(graphics); } catch (IOException e) { e.printStackTrace(); }
+        bricks.draw(graphics);
     }
 
     @Override
@@ -69,7 +71,11 @@ public class GameManager extends JPanel implements Input
                 ball.x = paddle.x + Projectile.xOffset;
                 ball.y = paddle.y - Projectile.yOffset;
             }
-            if(ball.x > Window.dimension.width - (ball.width * 2) || ball.x <= 0) { ball.dispX = -ball.dispX; }
+            if (bricks.intersect(ball)) {
+                ball.dispX = -ball.dispX;
+                ball.dispY = -ball.dispY;
+            }
+            if      (ball.x > Window.dimension.width - (ball.width * 2) || ball.x <= 0) { ball.dispX = -ball.dispX; }
             else if (ball.y <= 0 - ball.height || (ball.intersects(paddle))) ball.dispY = -ball.dispY;
             else if (ball.y > Window.dimension.height) Projectile.isIdle = true;
             repaint();
@@ -87,4 +93,5 @@ public class GameManager extends JPanel implements Input
     private Timer timer;
     private Paddle paddle; 
     private Projectile ball; 
+    private Bricks bricks;
 }
