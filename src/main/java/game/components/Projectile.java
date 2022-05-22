@@ -11,7 +11,7 @@ import java.awt.Color;
 public class Projectile extends GameObject
 {
     public int dispX = 0;
-    public int dispY = 5;
+    public int dispY = 6;
     public final static int yOffset = 20;
     public final static int xOffset = 25;
     public static boolean isIdle = true;
@@ -36,13 +36,10 @@ public class Projectile extends GameObject
      * Randomizes the initial direction of the projectile
      */
     public void randomize() {
-        int max = 5;
-        int min = -5;
+        int max = 6;
+        int min = -6;
 
-        while(dispX == 0) {
-            dispX = new Random().nextInt(max - min) + min;
-        }
-        
+        dispX = new Random().nextInt(max - min) + min;
         isIdle = false;
     }
 
