@@ -1,10 +1,29 @@
 package game.components;
 
 import java.awt.Color;
+
+
+// enum BrickTypes {
+//     BRONZE("bronzeBrick.png"),
+//     SILVER("silverBrick.png"),
+//     GOLDEN("goldBrick.png");
+
+//     String img;
+
+//     BrickTypes(String img){
+//         this.img = img;
+//     }
+
+    
+// }
+
+/*
+* enumrates for the @brick types
+*/
 enum BrickTypes {
-    BRONZE(Color.RED),
-    SILVER(Color.CYAN),
-    GOLDEN(Color.BLUE);
+    BRONZE(Color.green),
+    SILVER(Color.BLUE),
+    GOLDEN(Color.BLACK);
 
     Color color;
 
@@ -13,4 +32,5 @@ enum BrickTypes {
     }
 
     
+
 }

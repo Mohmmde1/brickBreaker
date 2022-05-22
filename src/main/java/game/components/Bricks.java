@@ -3,6 +3,7 @@ package game.components;
 import java.util.Vector;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.io.IOException;
 import java.awt.Dimension;
 
 
@@ -17,26 +18,36 @@ public class Bricks {
 
 
     Bricks(){
-        populate();
+        generate();
     }
+    /*
+    loops through @bricks 
+    and check if there is interseciton
+    */
     public boolean intersect(Projectile projectile) {
         for (Brick brick : bricks) {
             if (brick.intersects(projectile)) {
                 brick.hit();
-                bricks.remove(brick);
+                if (brick.destroyed) bricks.remove(brick);
                 return true;
             }
         }
         return false;
     }
 
-    public void draw(Graphics g){
+    /*
+    * darw the bricks
+    */
+    public void draw(Graphics g) throws IOException{
         for (Brick brick : bricks) {
             brick.draw(g);
         }
     }
 
-    public void populate() {
+    /*
+    * generates @bricks
+    */
+    public void generate() {
         for (int i = 0; i < brickCount; i++) {
             for (int j = 0; j < brickCount; j++) {
                 
