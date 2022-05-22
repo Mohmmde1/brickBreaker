@@ -1,17 +1,33 @@
-// package game.components;
+package game.components;
 
-// import game.components.GameObject;
+import java.awt.Point;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.util.Random;
+public class Brick extends GameObject{
+    BrickTypes strength;
+    BrickTypes[] arr = BrickTypes.values();
+    
+    boolean destroyed = false;
 
-// public class Brick extends GameObject{
-//     // hittalbe type var
-//     // hittalbe type;
-//     int strength;
+   
+    Brick(Point p, Dimension d) {
+        super(p, d);
+        strength =  arr[(new Random().nextInt()) % 1];
+    }
 
-//     Brick() {
+    void hit() {
+        if (destroyed) return;
+        if(strength == BrickTypes.BRONZE) destroyed = true;
+        int index = strength.ordinal()-1;
+        strength = arr[index+1];
+    }
 
-//     }
-
-//     void hit() {
-//     // TODO Auto-generated method stub
-//     }
-// }
+    void draw(Graphics g){
+        if (destroyed) return;
+        g.setColor(strength.color);
+     
+        g.drawRect(point.x, point.y, dimension.width, dimension.height);   
+        
+    }
+}
