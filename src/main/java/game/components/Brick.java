@@ -1,32 +1,31 @@
 package game.components;
 
 import java.awt.Point;
-import java.io.IOException;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+
 import java.util.Random;
-public class Brick extends GameObject{
-    private BrickTypes brickType;
-    private BrickTypes[] arr = BrickTypes.values();
+import java.io.IOException;
+
+public class Brick extends GameObject {
+    private BrickTypes type;
+    private final BrickTypes[] types = BrickTypes.values();
     
+    public static int count;
     public boolean destroyed = false;
 
-   
-    Brick(Point p, Dimension d) {
-        super(p, d);
-        brickType =  arr[(new Random().nextInt(arr.length))];
+    Brick(Point point, Dimension dimension) {
+        super(point, dimension);
+        type = types[(new Random().nextInt(types.length))];
+        count++;
     }
 
-    /* 
-    * when brick gets hit by the ball 
-    * it changes the @brickType
-    */
-    void hit() {
-        int index = brickType.ordinal();
+    /** OnHit event trigger */
+    void onHit() {
+        if (type.hits == 1) destroyed = true;
         if (destroyed) return;
-        if(brickType.ordinal() == 0) destroyed = true;
-        else brickType = arr[--index];
+        else type = types[type.hits-2];
     }
 
     /*
@@ -34,10 +33,6 @@ public class Brick extends GameObject{
     */
     void draw(Graphics g) throws IOException{
         if (destroyed) return;
-        g.setColor(Color.BLACK);
-        g.drawRect(point.x, point.y, dimension.width, dimension.height);   
-        g.setColor(brickType.color);
-        g.fillRect(point.x, point.y, dimension.width, dimension.height);
-        // g.drawImage(loadBufferedImage(brickType.img), x, y, dimension.width, dimension.height, null); 
+        g.drawImage(loadBufferedImage(type.img), x, y, dimension.width, dimension.height, null); 
     }
 }

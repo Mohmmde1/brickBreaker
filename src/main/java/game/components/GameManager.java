@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -13,12 +14,12 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 public class GameManager extends JPanel implements Input {
+
     public GameManager() {
-        paddle = new Paddle(new Point(Window.getWidth() / 2 - Paddle.xOffset, Window.getHeight() - Paddle.yOffset),
-                new Dimension(60, 10));
-        ball = new Projectile(new Point(paddle.x + Projectile.xOffset, paddle.y - Projectile.yOffset),
-                new Dimension(10, 10));
-        bricks = new Bricks();
+        paddle = new Paddle(new Point(Window.getWidth() / 2 - Paddle.xOffset, Window.getHeight() - Paddle.yOffset), new Dimension(60, 10));
+        ball = new Projectile(new Point(paddle.x + Projectile.xOffset, paddle.y - Projectile.yOffset), new Dimension(10, 10));
+        canva = Canvas.getInstance();
+        
         addKeyListener(this);
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
@@ -28,55 +29,36 @@ public class GameManager extends JPanel implements Input {
     }
 
     public void paint(Graphics g) {
-        final Graphics graphics = g;
-        super.paint(g);
+        Graphics2D g2D = (Graphics2D)g; 
+        super.paint(g2D);
 
         try {
-            paddle.draw(graphics);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            ball.draw(graphics);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            bricks.draw(graphics);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            paddle.draw(g2D);
+            ball.draw(g2D);
+            canva.draw(g2D);
+        } catch (IOException e) { e.printStackTrace(); }
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            movePaddle(Direction.RIGHT);
-        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            movePaddle(Direction.LEFT);
-        }
-
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) movePaddle(Direction.RIGHT);
+        else if (e.getKeyCode() == KeyEvent.VK_LEFT) movePaddle(Direction.LEFT);
+        
         if (e.getKeyCode() == KeyEvent.VK_SPACE
-                || e.getKeyCode() == KeyEvent.VK_RIGHT
-                || e.getKeyCode() == KeyEvent.VK_LEFT
-                        && Projectile.isIdle) {
+            || e.getKeyCode() == KeyEvent.VK_RIGHT 
+            || e.getKeyCode() == KeyEvent.VK_LEFT
+            && Projectile.isIdle) {
             isPlaying = true;
         }
-        if (e.getKeyCode() == KeyEvent.VK_SPACE && Projectile.isIdle)
-            ball.randomize();
+
+        if (e.getKeyCode() == KeyEvent.VK_SPACE && Projectile.isIdle)ball.randomize();
 
         repaint();
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-        System.out.println("GameManager.keyTyped()");
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        System.out.println("GameManager.keyReleased()");
-    }
+    public void keyTyped(KeyEvent e) { System.out.println("GameManager.keyTyped()"); }
+    public void keyReleased(KeyEvent e) { System.out.println("GameManager.keyReleased()"); }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -87,7 +69,7 @@ public class GameManager extends JPanel implements Input {
                 ball.x = paddle.x + Projectile.xOffset;
                 ball.y = paddle.y - Projectile.yOffset;
             }
-            if (bricks.intersect(ball)) {
+            if (canva.intersect(ball)) {
                 ball.dispX = -ball.dispX;
                 ball.dispY = -ball.dispY;
             }
@@ -107,10 +89,10 @@ public class GameManager extends JPanel implements Input {
         repaint(paddle.x, paddle.y, paddle.width, paddle.height);
     }
 
-    private final int delay = 5;
+    private final int delay = 2;
     private boolean isPlaying = false;
     private Timer timer;
     private Paddle paddle;
     private Projectile ball;
-    private Bricks bricks;
+    private Canvas canva;
 }

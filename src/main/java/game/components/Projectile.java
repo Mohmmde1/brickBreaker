@@ -11,7 +11,7 @@ import java.awt.Color;
 public class Projectile extends GameObject
 {
     public int dispX = 0;
-    public int dispY = 6;
+    public int dispY = 8;
     public final static int yOffset = 20;
     public final static int xOffset = 25;
     public static boolean isIdle = true;
