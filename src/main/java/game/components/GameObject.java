@@ -7,12 +7,13 @@ import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
+import utils.Image;
+
 import java.io.File;
 import java.io.IOException;
 
 public class GameObject extends Rectangle 
 {
-     protected final String ASSETS_DIR = "Assets/";
      protected Point point;
      protected Dimension dimension;
 
@@ -23,6 +24,6 @@ public class GameObject extends Rectangle
      }
 
      protected final BufferedImage loadBufferedImage(String filename) throws IOException {
-          return ImageIO.read(new File(ASSETS_DIR, "img/" + filename));
+          return Image.optimizeImage((BufferedImage)ImageIO.read(new File(Image.IMG_DIR, filename)));
      }
 }
