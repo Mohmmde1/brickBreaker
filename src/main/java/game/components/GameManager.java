@@ -51,7 +51,7 @@ public class GameManager extends JPanel implements Input {
             isPlaying = true;
         }
 
-        if (e.getKeyCode() == KeyEvent.VK_SPACE && Projectile.isIdle)ball.randomize();
+        if (e.getKeyCode() == KeyEvent.VK_SPACE && Projectile.isIdle) ball.randomize();
 
         repaint();
     }

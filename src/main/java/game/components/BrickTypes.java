@@ -2,13 +2,11 @@ package game.components;
 
 import java.awt.Color;
 
-/*
-* enumrates for the @brick types
-*/
+/** Enumrate for brick types */
 enum BrickTypes {
-    BRONZE(Color.green, 1, "01-Breakout-Tiles.png"),
-    GOLDEN(Color.BLACK, 2, "03-Breakout-Tiles.png"),
-    SILVER(Color.BLUE, 3, "05-Breakout-Tiles.png");
+    VARIANTA(Color.green, 1, "01-Breakout-Tiles.png"),
+    VARIANTB(Color.BLACK, 2, "03-Breakout-Tiles.png"),
+    VARIANTC(Color.BLUE, 3, "05-Breakout-Tiles.png");
 
     public Color color;
     public int hits;
