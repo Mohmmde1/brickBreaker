@@ -86,4 +86,31 @@ public class Projectile extends GameObject
                 (tw < tx || tw > rx) &&
                 (th < ty || th > ry));
     }
+
+    /**
+     * Controls the bouncing behavior of the ball when
+     * it intersects with the paddle {@code Rectangle}
+     * 
+     * @param r is the paddle {@code Rectangle}
+     */
+    public void bounce(Rectangle r) {
+        int rw = r.width;
+        int rx = r.x;
+        int tx = this.x;
+
+        int partsNo = 3;
+        int part = rw / partsNo;
+
+        dispY = -dispY;
+
+        if((tx < rx + part) && dispX > 0) {dispX = - Math.abs(dispX); System.out.println("first part");}
+        else if((tx < rx + part) && dispX == 0) {dispX--; System.out.println("first part");}
+
+        if((tx >= rx + part) && (tx <= rx + 2 * (rw / partsNo))) {dispX *= 0.75; System.out.println("second part");}
+
+        if((tx > rx + 2 * (rw / partsNo) && dispX < 0)) {dispX = Math.abs(dispX); System.out.println("third part");}
+        else if((tx > rx + 2 * (rw / partsNo) && dispX == 0)) {dispX++; System.out.println("third part");}
+
+        System.out.println("ball bounced");
+    }
 }
