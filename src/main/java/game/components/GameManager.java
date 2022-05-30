@@ -75,9 +75,11 @@ public class GameManager extends JPanel implements Input {
             }
             if (ball.x > Window.dimension.width - (ball.width * 2) || ball.x <= 0) {
                 ball.dispX = -ball.dispX;
-            } else if (ball.y <= 0 - ball.height || (ball.intersects(paddle)))
+            } else if (ball.y <= 0 - ball.height) {
                 ball.dispY = -ball.dispY;
-            else if (ball.y > Window.dimension.height)
+            } else if ((ball.intersects(paddle))) {
+                ball.bounce(paddle);
+            } else if (ball.y > Window.dimension.height)
                 Projectile.isIdle = true;
             repaint();
         }
