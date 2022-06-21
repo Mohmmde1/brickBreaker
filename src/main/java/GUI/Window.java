@@ -1,27 +1,12 @@
 package GUI;
 
 import javax.swing.JFrame;
-import java.awt.Toolkit;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 
 import game.components.GameManager;
 
 public class Window {
-    protected JFrame frame;
-    public static Dimension dimension = new Dimension(900, 600);
-
-    /**
-     * @param title
-     */
-    public Window(String title) {
-        frame = new JFrame();
-        frame.setTitle(title);
-    }
-
-    public Window() {
-        this("Brick Breaker");
-        setWindowProps(0, 0);
-    }
 
     /**
      * @param title
@@ -31,49 +16,83 @@ public class Window {
      * @param onCloseOperation
      */
     public Window(String title, Dimension dimension, boolean resizeable, boolean visibility, int onCloseOperation) {
-        this(title);
-        Window.dimension.width = dimension.width;
-        Window.dimension.height = dimension.height;
-        this.resizeable = resizeable;
-        this.visibility = visibility;
-        this.onCloseOperation = onCloseOperation;
-
-        setWindowProps(0, 0);
-    }
-
-    /**
-     * Initializes the window frame
-     * 
-     * @param horizGap
-     * @param vertGap
-     */
-    public void setWindowProps(Integer horizGap, Integer vertGap) {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-        if (horizGap == null)
-            horizGap = 0;
-        centerX = ((int) screenSize.getWidth() - (horizGap * 2) - 100 - dimension.width) / 2;
-        if (vertGap == null)
-            vertGap = 0;
-        centerY = ((int) screenSize.getHeight() - (vertGap * 2) - dimension.height) / 2;
-
-        frame.setBounds(centerX, centerY, dimension.width, dimension.height);
+        frame.setTitle(title);
+        frame.setSize(dimension);
         frame.setResizable(resizeable);
-        frame.setDefaultCloseOperation(onCloseOperation);
-        if (this.getClass().getName() == "GUI.Window") { initManager(); };
         frame.setVisible(visibility);
+        frame.setDefaultCloseOperation(onCloseOperation);
+    }
+
+    public Window(){
+        this(title, dimension, resizable, visibility, onCloseOperation);
     }
 
     /**
-     * Adds a game manager
+     * Centers the window
      */
-    public void initManager() { frame.add(new GameManager()); }
-    public static int getWidth() { return dimension.width; }
-    public static int getHeight() { return dimension.height; }
+    private void setWindowProps() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int centerX = (int) (screenSize.getWidth() - dimension.getWidth()) / 2;
+        int centerY = (int) (screenSize.getHeight() - dimension.getHeight()) / 2;
+        frame.setBounds(centerX, centerY, (int) dimension.getWidth(), (int) dimension.getHeight());
+    }
+  
+    public void fitPanels() {
+        setWindowProps();
+        frame.addKeyListener(gameManager);
 
-    private static int centerX = 0;
-    private static int centerY = 0;
-    private boolean resizeable = false;
-    private boolean visibility = true;
-    private int onCloseOperation = JFrame.EXIT_ON_CLOSE;
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(GameManager.scoreManager);
+        GameManager.scoreManager.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 39, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout gameManagerLayout = new javax.swing.GroupLayout(gameManager);
+        gameManager.setLayout(gameManagerLayout);
+        gameManagerLayout.setHorizontalGroup(
+            gameManagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 744, Short.MAX_VALUE)
+        );
+        gameManagerLayout.setVerticalGroup(
+            gameManagerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 512, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(frame.getContentPane());
+        frame.getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(GameManager.scoreManager, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(gameManager, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(GameManager.scoreManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gameManager, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        frame.pack();
+        gameManager.initComponents();
+    } 
+
+    
+
+    protected JFrame frame = new JFrame();
+    private static Dimension dimension = new Dimension(900, 600);
+    private static String title = "BreakBreaker";
+    private static boolean resizable = false;
+    private static boolean visibility = true;
+    private static int onCloseOperation = JFrame.EXIT_ON_CLOSE;
+    private GameManager gameManager = new GameManager();
 }

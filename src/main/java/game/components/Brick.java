@@ -1,7 +1,6 @@
 package game.components;
 
 import java.awt.Point;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
@@ -12,13 +11,14 @@ public class Brick extends GameObject {
     private BrickTypes type;
     private final BrickTypes[] types = BrickTypes.values();
     
-    public static int count;
+    // to keep attract of how many bricks have been created
+    public static int countBricks = 0; 
     public boolean destroyed = false;
 
     Brick(Point point, Dimension dimension) {
         super(point, dimension);
         type = types[(new Random().nextInt(types.length))];
-        count++;
+        countBricks++;
     }
 
     /** OnHit event trigger */
@@ -33,6 +33,8 @@ public class Brick extends GameObject {
     */
     void draw(Graphics g) throws IOException{
         if (destroyed) return;
-        g.drawImage(loadBufferedImage(type.img), x, y, dimension.width, dimension.height, null); 
+        // g.drawImage(loadBufferedImage(type.img), x, y, dimension.width, dimension.height, null
+        g.setColor(type.color);
+        g.fillRect(x, y, dimension.width, dimension.height);
     }
 }

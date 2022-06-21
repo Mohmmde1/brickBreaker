@@ -7,6 +7,9 @@ import java.awt.Graphics2D;
 public class Image {
     public static final String IMG_DIR = "Assets/img/";
 
+    public Image(String string) {
+    }
+
     /**
      * @description Convert the image into a compatible format for local rendering.
      * @param img the bufferedImage

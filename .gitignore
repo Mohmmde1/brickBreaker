@@ -30,4 +30,7 @@ config.json
 
 # mac
 .DS_Store
-.history
+
+# extra
+resources
+todo.md
