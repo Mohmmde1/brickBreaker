@@ -2,15 +2,11 @@ package GUI;
 
 import javax.swing.JFrame;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 
 import game.components.GameManager;
 
-
 public class Window {
-
-    protected JFrame frame = new JFrame();
-    private GameManager gameManager = new GameManager();
-
 
     /**
      * @param title
@@ -25,18 +21,24 @@ public class Window {
         frame.setResizable(resizeable);
         frame.setVisible(visibility);
         frame.setDefaultCloseOperation(onCloseOperation);
-
-
     }
 
     public Window(){
         this(title, dimension, resizable, visibility, onCloseOperation);
     }
 
+    /**
+     * Centers the window
+     */
+    private void setWindowProps() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int centerX = (int) (screenSize.getWidth() - dimension.getWidth()) / 2;
+        int centerY = (int) (screenSize.getHeight() - dimension.getHeight()) / 2;
+        frame.setBounds(centerX, centerY, (int) dimension.getWidth(), (int) dimension.getHeight());
+    }
   
     public void fitPanels() {
-
-        
+        setWindowProps();
         frame.addKeyListener(gameManager);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(GameManager.scoreManager);
@@ -86,9 +88,11 @@ public class Window {
 
     
 
+    protected JFrame frame = new JFrame();
+    private static Dimension dimension = new Dimension(900, 600);
     private static String title = "BreakBreaker";
     private static boolean resizable = false;
     private static boolean visibility = true;
     private static int onCloseOperation = JFrame.EXIT_ON_CLOSE;
-    private static Dimension dimension = new Dimension(900, 900);
+    private GameManager gameManager = new GameManager();
 }

@@ -10,16 +10,32 @@ import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 
 public class Launcher extends Window 
 {
     public Launcher(Dimension dimension) {
         super("Brick Breaker Game Launcher", dimension, false, true, JFrame.EXIT_ON_CLOSE);
-
-        initComponents();
+        setWindowProps(horizGap, vertGap, dimension);
+        initComponents(dimension);
     }
 
-    private void initComponents() {
+    /**
+     * Centers the window
+     * 
+     * @param horizGap
+     * @param vertGap
+     * @param dimension
+     */
+    private void setWindowProps(Integer horizGap, Integer vertGap, Dimension dimension) {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        centerX = (int) (screenSize.getWidth() - (horizGap * 2) - 100 - dimension.getWidth()) / 2;
+        centerY = (int) ((screenSize.getHeight() - (vertGap * 2) - dimension.getHeight()) / 2);
+    }
+
+    private void initComponents(Dimension dimension) {
+        frame.setBounds(centerX, centerY, (int)dimension.getWidth(), (int)dimension.getHeight());
+
         mainPanel = new javax.swing.JPanel();
         labelName = new javax.swing.JLabel();
         nickname = new javax.swing.JTextField();
@@ -108,4 +124,6 @@ public class Launcher extends Window
     private JTextField nickname;
     private int horizGap = 50;
     private int vertGap = 10;
+    private int centerX;
+    private int centerY;
 }

@@ -15,8 +15,7 @@ public class Canvas {
     private int startY = 50;
     private int tiles = 10;
 
-    
-    
+    public Canvas() { generate(); }
 
     /**
      * loops through bricks and checks if there is intersection
@@ -46,7 +45,7 @@ public class Canvas {
     }
 
     /** Generates the bricks */
-    public void generate() {
+    private void generate() {
         for (int i = 0; i < tiles; i++) {
             if (i % 2 == 0) continue;
             for (int j = 0; j < tiles; j++) {
