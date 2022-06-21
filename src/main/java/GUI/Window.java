@@ -30,11 +30,7 @@ public class Window {
     }
 
     public Window(){
-        frame.setTitle(title);
-        frame.setVisible(visibility); 
-        frame.setResizable(resizable);
-        frame.setSize(new Dimension(900, 900));
-        frame.setDefaultCloseOperation(onCloseOperation);
+        this(title, dimension, resizable, visibility, onCloseOperation);
 
     }
 
@@ -91,8 +87,9 @@ public class Window {
 
     
 
-    private String title = "BreakBreaker";
-    private boolean resizable = false;
-    private boolean visibility = true;
-    private int onCloseOperation = JFrame.EXIT_ON_CLOSE;
+    private static String title = "BreakBreaker";
+    private static boolean resizable = false;
+    private static boolean visibility = true;
+    private static int onCloseOperation = JFrame.EXIT_ON_CLOSE;
+    private static Dimension dimension = new Dimension(900, 900);
 }
