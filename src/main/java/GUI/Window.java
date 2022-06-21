@@ -31,7 +31,6 @@ public class Window {
 
     public Window(){
         this(title, dimension, resizable, visibility, onCloseOperation);
-
     }
 
   

@@ -16,11 +16,7 @@ public class Canvas {
     private int tiles = 10;
 
     
-    public static Canvas getInstance() {
-        Canvas s_Instance = new Canvas();
-        s_Instance.generate();
-        return s_Instance;
-    }
+    
 
     /**
      * loops through bricks and checks if there is intersection

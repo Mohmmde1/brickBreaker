@@ -4,7 +4,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import GUI.Window;
 
 import java.awt.Font;
 import java.awt.Graphics;
@@ -30,7 +29,8 @@ public class GameManager extends JPanel implements Input {
     public void initComponents() {
         paddle = new Paddle(new Point(getWidth() / 2, getHeight() - Paddle.yOffset), new Dimension(60, 10));
         ball = new Projectile(new Point(paddle.x + Projectile.xOffset, paddle.y - Projectile.yOffset), new Dimension(10, 10));
-        canva = Canvas.getInstance();
+        canva = new Canvas();
+        canva.generate();
     }
 
     public void paint(Graphics g) {
