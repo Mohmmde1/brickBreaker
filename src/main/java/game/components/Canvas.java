@@ -9,11 +9,11 @@ import java.io.IOException;
 
 public class Canvas {
 
+    private Dimension tileDim = new Dimension(50, 20);
     private Vector<Brick> bricks = new Vector<Brick>();
     private int startX = 100;
     private int startY = 50;
     private int tiles = 10;
-    private Dimension tileDim = new Dimension(50, 20);
 
     
     public static Canvas getInstance() {

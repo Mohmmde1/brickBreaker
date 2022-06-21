@@ -69,7 +69,7 @@ public class GameManager extends JPanel implements Input {
         if (e.getKeyCode() == KeyEvent.VK_SPACE && Projectile.isIdle)
             ball.randomize();
         if (e.getKeyCode() == KeyEvent.VK_R)
-            reStart();
+            restart();
 
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE && Projectile.isIdle)
             System.exit(1);
@@ -126,19 +126,20 @@ public class GameManager extends JPanel implements Input {
 
     public void gameOver(Graphics g) {
 
-        int txtLength = 100;
+        int gameOverTxtLength = 150;
+        int subTxtLength = 100;
         String fontStyle = "Arial";
         g.setColor(Color.RED);
         g.setFont(new Font(fontStyle, Font.BOLD, 50));
-        g.drawString("Game Over", getWidth() / 2 - txtLength, getHeight() / 2);
+        g.drawString("Game Over", getWidth() / 2 - gameOverTxtLength, getHeight() / 2);
 
         g.setColor(Color.BLACK);
         g.setFont(new Font(fontStyle, Font.ITALIC, 20));
-        g.drawString("Press R to try again", getWidth() / 2 - txtLength + 20, getHeight() / 2 + 50);
-        g.drawString("Press ESC to exit", getWidth() / 2 - txtLength + 20, getHeight() / 2 + txtLength);
+        g.drawString("Press R to try again", getWidth() / 2 - subTxtLength , getHeight() / 2 + 50);
+        g.drawString("Press ESC to exit", getWidth() / 2 - subTxtLength , getHeight() / 2 + 100);
     }
 
-    public void reStart() {
+    public void restart() {
         initComponents();
         scoreManager.trials.numTrials = 3;
         scoreManager.repaint();

@@ -8,7 +8,7 @@ import game.components.GameManager;
 
 public class Window {
 
-    protected static  JFrame frame = new JFrame();
+    protected JFrame frame = new JFrame();
     private GameManager gameManager = new GameManager();
 
 
