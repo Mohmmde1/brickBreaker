@@ -4,11 +4,12 @@ import javax.swing.JFrame;
 import java.awt.Dimension;
 
 import game.components.GameManager;
-import game.components.ScoreManager;
+
 
 public class Window {
 
-    protected  JFrame frame = new JFrame();
+    protected static  JFrame frame = new JFrame();
+    private GameManager gameManager = new GameManager();
 
 
     /**
@@ -38,9 +39,8 @@ public class Window {
     }
 
   
-    public  void initPanels() {
+    public void fitPanels() {
 
-        GameManager gameManager = new GameManager();
         
         frame.addKeyListener(gameManager);
 
@@ -89,7 +89,7 @@ public class Window {
         gameManager.initComponents();
     } 
 
-   
+    
 
     private String title = "BreakBreaker";
     private boolean resizable = false;

@@ -3,7 +3,10 @@ package game.components;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import java.awt.Font;  
+
+import GUI.Window;
+
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -15,66 +18,74 @@ import java.awt.Color;
 
 public class GameManager extends JPanel implements Input {
 
-    public static ScoreManager scoreManager; 
+    public static ScoreManager scoreManager;
 
     public GameManager() {
         timer = new Timer(delay, this);
         timer.start(); // Sends action events
-        scoreManager = ScoreManager.getInstance();
-        
+        scoreManager = new ScoreManager();
+
     }
 
-    public void initComponents(){
+    public void initComponents() {
         paddle = new Paddle(new Point(getWidth() / 2, getHeight() - Paddle.yOffset), new Dimension(60, 10));
         ball = new Projectile(new Point(paddle.x + Projectile.xOffset, paddle.y - Projectile.yOffset), new Dimension(10, 10));
         canva = Canvas.getInstance();
-        
     }
 
     public void paint(Graphics g) {
-        Graphics2D g2D = (Graphics2D)g; 
+        Graphics2D g2D = (Graphics2D) g;
         super.paint(g2D);
 
         try {
-            if (scoreManager.trials.numTrials == 0){
+            if (scoreManager.trials.numTrials == 0) {
 
                 gameOver(g2D);
-            }
-            else{
+            } else {
 
                 paddle.draw(g2D);
                 ball.draw(g2D);
                 canva.draw(g2D);
             }
-        } catch (IOException e) { e.printStackTrace(); }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) movePaddle(Direction.RIGHT);
-        else if (e.getKeyCode() == KeyEvent.VK_LEFT) movePaddle(Direction.LEFT);
-        
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+            movePaddle(Direction.RIGHT);
+        else if (e.getKeyCode() == KeyEvent.VK_LEFT)
+            movePaddle(Direction.LEFT);
+
         if (e.getKeyCode() == KeyEvent.VK_SPACE
-            || e.getKeyCode() == KeyEvent.VK_RIGHT 
-            || e.getKeyCode() == KeyEvent.VK_LEFT
-            && Projectile.isIdle) {
+                || e.getKeyCode() == KeyEvent.VK_RIGHT
+                || e.getKeyCode() == KeyEvent.VK_LEFT
+                        && Projectile.isIdle) {
             isPlaying = true;
         }
 
-        if (e.getKeyCode() == KeyEvent.VK_SPACE && Projectile.isIdle) ball.randomize();
-        if (e.getKeyCode() == KeyEvent.VK_R && Projectile.isIdle) {
-            System.out.println("hi");
+        if (e.getKeyCode() == KeyEvent.VK_SPACE && Projectile.isIdle)
+            ball.randomize();
+        if (e.getKeyCode() == KeyEvent.VK_R)
             reStart();
-        }
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE && Projectile.isIdle) System.exit(10);;
+
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE && Projectile.isIdle)
+            System.exit(1);
         
 
         repaint();
     }
 
     @Override
-    public void keyTyped(KeyEvent e) { System.out.println("GameManager.keyTyped()"); }
-    public void keyReleased(KeyEvent e) { System.out.println("GameManager.keyReleased()"); }
+    public void keyTyped(KeyEvent e) {
+        System.out.println("GameManager.keyTyped()");
+    }
+
+    public void keyReleased(KeyEvent e) {
+        System.out.println("GameManager.keyReleased()");
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -96,10 +107,12 @@ public class GameManager extends JPanel implements Input {
                 ball.dispY = -ball.dispY;
             } else if ((ball.intersects(paddle))) {
                 ball.bounce(paddle);
-            } else if (ball.y > getHeight()){
+            } else if (ball.y > getHeight()) {
                 Projectile.isIdle = true;
-                if(scoreManager.trials.hit()) scoreManager.repaint();
-                else isPlaying = false;
+                if (scoreManager.trials.hit())
+                    scoreManager.repaint();
+                else
+                    isPlaying = false;
             }
             repaint();
         }
@@ -110,26 +123,26 @@ public class GameManager extends JPanel implements Input {
         paddle.move(direction, getWidth());
         repaint(paddle.x, paddle.y, paddle.width, paddle.height);
     }
+
     public void gameOver(Graphics g) {
 
+        int txtLength = 100;
+        String fontStyle = "Arial";
+        g.setColor(Color.RED);
+        g.setFont(new Font(fontStyle, Font.BOLD, 50));
+        g.drawString("Game Over", getWidth() / 2 - txtLength, getHeight() / 2);
 
-            int txtLength = 100;
-            g.setColor(Color.RED);
-            g.setFont(new Font("Arial", Font.BOLD, 50));
-            g.drawString("Game Over", getWidth()/2-txtLength, getHeight()/2);
+        g.setColor(Color.BLACK);
+        g.setFont(new Font(fontStyle, Font.ITALIC, 20));
+        g.drawString("Press R to try again", getWidth() / 2 - txtLength + 20, getHeight() / 2 + 50);
+        g.drawString("Press ESC to exit", getWidth() / 2 - txtLength + 20, getHeight() / 2 + txtLength);
+    }
 
-            g.setColor(Color.BLACK);
-            g.setFont(new Font("Arial",Font.ITALIC , 20));
-            g.drawString("Press R to try again", getWidth()/2-txtLength, getHeight()/2+50);
-            g.drawString("Press ESC to exit", getWidth()/2-txtLength, getHeight()/2+txtLength);
-        }
-
-    public void reStart(){
+    public void reStart() {
         initComponents();
-        scoreManager = ScoreManager.getInstance();
+        scoreManager.trials.numTrials = 3;
         scoreManager.repaint();
     }
-    
 
     private final int delay = 2;
     private boolean isPlaying = false;

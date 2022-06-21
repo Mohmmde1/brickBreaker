@@ -24,13 +24,14 @@ public class Trials{
 
     public boolean hit() {
         if (numTrials == 0) return false;
-        lives.remove(--numTrials); 
+        --numTrials; 
         return true;
     }
 
     public void draw(Graphics g) throws IOException {
-        for (Live live : lives) live.draw(g);
-        System.out.println("here drawing ");
+        for (int i = 0; i < numTrials; i++) {
+            lives.get(i).draw(g);
+        };
     }
 
     private void _init_Trials(){

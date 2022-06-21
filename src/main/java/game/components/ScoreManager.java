@@ -15,7 +15,7 @@ public class ScoreManager extends JPanel {
     public void paint(Graphics g) {
         Graphics2D g2D = (Graphics2D) g;
         super.paint(g2D);
-        System.out.println("Here");
+
 
         try {
             trials.draw(g2D);
@@ -23,9 +23,4 @@ public class ScoreManager extends JPanel {
             e.printStackTrace();
         }
     }
-
-    public static ScoreManager getInstance() {
-        return new ScoreManager();
-    }
-
 }
