@@ -22,12 +22,12 @@ public final class Application {
             return;
         }
         gameWindow = new Window();
-        gameWindow.initManager();
+        gameWindow.initPanels();
     }
 
     public static void start() throws IOException, ParseException {
         gameWindow = new Window(Config.title() + " v" + Config.getVersion(), Config.getWindowDimension(), Config.resizable(), true, JFrame.EXIT_ON_CLOSE);
-        gameWindow.initManager();
+        gameWindow.initPanels();
     }
     
     private static Window gameWindow;

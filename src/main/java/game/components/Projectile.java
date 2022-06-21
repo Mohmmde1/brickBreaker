@@ -7,7 +7,6 @@ import java.awt.Dimension;
 import java.io.IOException;
 import java.util.Random;
 
-import java.awt.Color;
 public class Projectile extends GameObject
 {
     public int dispX = 0;
@@ -28,7 +27,6 @@ public class Projectile extends GameObject
      * @throws IOException
      */
     public void draw(Graphics g) throws IOException {
-        g.setColor(Color.RED);
         g.drawImage(loadBufferedImage("ball.png"), x, y + width, dimension.width, dimension.height, null); 
     }
 

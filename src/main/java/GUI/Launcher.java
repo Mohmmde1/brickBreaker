@@ -15,7 +15,7 @@ public class Launcher extends Window
 {
     public Launcher(Dimension dimension) {
         super("Brick Breaker Game Launcher", dimension, false, true, JFrame.EXIT_ON_CLOSE);
-        setWindowProps(horizGap, vertGap);
+
         initComponents();
     }
 
