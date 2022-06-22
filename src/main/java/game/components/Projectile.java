@@ -104,12 +104,7 @@ public class Projectile extends GameObject
         if ((tx < rx + part) && dispX > 0) {
             dispX = -Math.abs(dispX);
             System.out.println("log: paddle's first part");
-        }
-        
-        if ((tx < rx + part)) {
-            dispX--;
-            System.out.println("log: paddle's first part");
-        } else if ((tx < rx + part) && dispX == 0) {
+        } else if ((tx < rx + part)) {
             dispX--;
             System.out.println("log: paddle's first part");
         }
@@ -123,12 +118,7 @@ public class Projectile extends GameObject
         if ((tx > rx + 2 * (rw / partsNo) && dispX < 0)) {
             dispX = Math.abs(dispX);
             System.out.println("log: paddle's third part");
-        }
-
-        if ((tx > rx + 2 * (rw / partsNo))) {
-            dispX++;
-            System.out.println("log: paddle's third part");
-        } else if ((tx > rx + 2 * (rw / partsNo) && dispX == 0)) {
+        } else if ((tx > rx + 2 * (rw / partsNo))) {
             dispX++;
             System.out.println("log: paddle's third part");
         }
