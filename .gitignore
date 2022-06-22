@@ -27,6 +27,7 @@ config.json
 
 # Secrets
 .env
+.keys
 
 # mac
 .DS_Store
