@@ -19,7 +19,7 @@ public final class Application {
         String env = (String) Config.dotenv.get("APP_ENV");
         if (env.equalsIgnoreCase("production")) {
             disableLogging();
-            new Launcher(new Dimension(200, 150));
+            new Launcher(new Dimension(425, 110));
             return;
         }
         gameWindow = new Window();
