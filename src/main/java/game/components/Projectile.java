@@ -11,7 +11,7 @@ import java.awt.Color;
 public class Projectile extends GameObject
 {
     public int dispX = 0;
-    public int dispY = 8;
+    public int dispY = 4;
     public final static int yOffset = 20;
     public final static int xOffset = 25;
     public static boolean isIdle = true;
@@ -36,8 +36,8 @@ public class Projectile extends GameObject
      * Randomizes the initial direction of the projectile
      */
     public void randomize() {
-        int max = 6;
-        int min = -6;
+        int max = 4;
+        int min = -4;
 
         dispX = new Random().nextInt(max - min) + min;
         isIdle = false;
@@ -103,14 +103,35 @@ public class Projectile extends GameObject
 
         dispY = -dispY;
 
-        if((tx < rx + part) && dispX > 0) {dispX = - Math.abs(dispX); System.out.println("first part");}
-        else if((tx < rx + part) && dispX == 0) {dispX--; System.out.println("first part");}
+        if ((tx < rx + part) && dispX > 0) {
+            dispX = -Math.abs(dispX);
+            System.out.println("log: paddle's first part");
+        }
+        if (tx < rx + part) {
+            dispX--;
+            System.out.println("log: paddle's first part");
+        } else if ((tx < rx + part) && dispX == 0) {
+            dispX--;
+            System.out.println("log: paddle's first part");
+        }
 
-        if((tx >= rx + part) && (tx <= rx + 2 * (rw / partsNo))) {dispX *= 0.75; System.out.println("second part");}
+        if ((tx >= rx + part) && (tx <= rx + 2 * (rw / partsNo))) {
+            dispX *= 0.75;
+            System.out.println("log: paddle's second part");
+        }
 
-        if((tx > rx + 2 * (rw / partsNo) && dispX < 0)) {dispX = Math.abs(dispX); System.out.println("third part");}
-        else if((tx > rx + 2 * (rw / partsNo) && dispX == 0)) {dispX++; System.out.println("third part");}
+        if ((tx > rx + 2 * (rw / partsNo) && dispX < 0)) {
+            dispX = Math.abs(dispX);
+            System.out.println("log: paddle's third part");
+        }
+        if (tx > rx + 2 * (rw / partsNo)) {
+            dispX++;
+            System.out.println("log: paddle's third part");
+        } else if ((tx > rx + 2 * (rw / partsNo) && dispX == 0)) {
+            dispX++;
+            System.out.println("log: paddle's third part");
+        }
 
-        System.out.println("ball bounced");
+        System.out.println("log: ball bounced");
     }
 }
