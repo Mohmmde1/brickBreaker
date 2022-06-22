@@ -10,7 +10,7 @@ import java.util.Random;
 public class Projectile extends GameObject
 {
     public int dispX = 0;
-    public int dispY = 4;
+    public int dispY = 6;
     public final static int yOffset = 20;
     public final static int xOffset = 25;
     public static boolean isIdle = true;
