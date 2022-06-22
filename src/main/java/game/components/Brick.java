@@ -22,7 +22,8 @@ public class Brick extends GameObject {
     }
 
     /** OnHit event trigger */
-    void onHit() {
+    void onHit(Projectile object) {
+        if (object != null) object.dispX = -object.dispX;
         if (type.hits == 1) destroyed = true;
         if (destroyed) return;
         else type = types[type.hits-2];

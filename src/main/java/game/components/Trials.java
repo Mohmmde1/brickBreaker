@@ -26,7 +26,7 @@ public class Trials {
             lives.add(new Live(new Point(i * dimension.width + i * padding + xOffset, dimension.height), dimension));
     }
 
-    public boolean onHit() {
+    public boolean onUpdate() {
         if (numTrials == 0) return false;
         numTrials--; 
         return true;
