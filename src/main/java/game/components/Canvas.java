@@ -24,7 +24,7 @@ public class Canvas {
     public boolean intersect(Projectile projectile) {
         for (Brick brick : bricks) {
             if (brick.intersects(projectile)) {
-                brick.onHit();
+                brick.onHit(projectile);
                 if (brick.destroyed)
                     bricks.remove(brick);
                 return true;

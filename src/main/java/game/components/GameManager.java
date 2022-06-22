@@ -102,7 +102,7 @@ public class GameManager extends JPanel implements IKeyAction {
                 ball.bounce(paddle);
             } else if (ball.y > getHeight()) {
                 Projectile.isIdle = true;
-                if (scoreManager.getTrials().onHit())
+                if (scoreManager.getTrials().onUpdate())
                     scoreManager.repaint();
                 else
                     isPlaying = false;
