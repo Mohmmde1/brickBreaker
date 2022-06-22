@@ -71,7 +71,6 @@ public class Launcher extends Window
         mainPanel.setMinimumSize(bkgSize);
         mainPanel.setMaximumSize(bkgSize);
         mainPanel.setSize(bkgSize);
-        frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
 
         mainPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(vertGap, horizGap, vertGap, horizGap));
         labelName.setText("NICKNAME:");

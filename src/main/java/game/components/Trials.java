@@ -8,17 +8,20 @@ import java.io.IOException;
 import java.util.Vector;
 
 public class Trials {
-    public final static int MAXTRIALS = 2;
+    public final static int MAXTRIALS = 3;
     public int numTrials = MAXTRIALS;
 
     private Dimension dimension = new  Dimension(30, 5);
     private Vector<Live> lives;
     
     Trials(){  
+        lives = new Vector<Live>(numTrials + 1);
+        initLives();
+    }
+
+    private void initLives(){
         int xOffset = 20;
         int padding = 10;
-        lives = new Vector<Live>(numTrials + 1);
-
         for (int i = 0; i < numTrials; i++) 
             lives.add(new Live(new Point(i * dimension.width + i * padding + xOffset, dimension.height), dimension));
     }
@@ -28,6 +31,7 @@ public class Trials {
         numTrials--; 
         return true;
     }
+
 
     public void draw(Graphics g) throws IOException {
         for (int i = 0; i < numTrials; i++) 
