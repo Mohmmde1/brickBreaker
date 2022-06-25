@@ -1,12 +1,12 @@
 package game.components;
 
+import game.Player;
+
 import java.awt.Point;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
 import java.util.Random;
-
-import game.Player;
 
 import java.io.IOException;
 
