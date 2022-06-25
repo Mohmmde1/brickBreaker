@@ -12,8 +12,7 @@ import java.io.IOException;
 public class ScoreManager extends JPanel {
     public ScoreManager() { trials = new Trials(); }
 
-    @Override
-    public void paint(Graphics g) {
+    @Override public void paint(Graphics g) {
         Graphics2D g2D = (Graphics2D) g;
         super.paint(g2D);
 
@@ -42,7 +41,7 @@ public class ScoreManager extends JPanel {
         g2D.setColor(Color.BLACK);
         g2D.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 15));
         g2D.drawString("Score " + currentScore, getWidth() / 2 - 30, 15);
-        g2D.drawString("Personal Best " + Player.highestScore, getWidth() - 300, 15);
+        g2D.drawString("Personal Best " + Player.highestScore, getWidth() - 200, 15);
     }
 
     private Trials trials;
