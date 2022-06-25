@@ -3,7 +3,9 @@ package game.components;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import game.Player;
 import game.Interfaces.IKeyAction;
+import utils.Config;
 
 import java.awt.Font;
 import java.awt.Graphics;
@@ -12,6 +14,7 @@ import java.awt.Point;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.awt.Color;
 
@@ -37,7 +40,7 @@ public class GameManager extends JPanel implements IKeyAction {
 
         try {
             if (scoreManager.getTrials().equals(0)) {
-                gameOver(g2D);
+                onGameOver(g2D);
             } else {
                 paddle.draw(g2D);
                 ball.draw(g2D);
@@ -46,8 +49,7 @@ public class GameManager extends JPanel implements IKeyAction {
         } catch (IOException e) { e.printStackTrace(); }
     }
 
-    @Override
-    public void keyPressed(KeyEvent e) {
+    @Override public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_RIGHT)
             movePaddle(Direction.RIGHT);
         else if (e.getKeyCode() == KeyEvent.VK_LEFT)
@@ -62,17 +64,22 @@ public class GameManager extends JPanel implements IKeyAction {
 
         if (e.getKeyCode() == KeyEvent.VK_SPACE && Projectile.isIdle)
             ball.randomize();
-        if (e.getKeyCode() == KeyEvent.VK_R && isPlaying)
+        if (e.getKeyCode() == KeyEvent.VK_R && isPlaying==false)
             restart();
 
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE && Projectile.isIdle)
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE && isPlaying==false) {
+            try { 
+                if(Player.highestScore < Player.score) Player.highestScore = Player.score;
+
+                Config.updatePlayer(true);
+            } catch (FileNotFoundException e1) { e1.printStackTrace(); }
             System.exit(1);
+        }
         
         repaint();
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
+    @Override public void keyTyped(KeyEvent e) {
         System.out.println("GameManager.keyTyped()");
     }
 
@@ -80,8 +87,7 @@ public class GameManager extends JPanel implements IKeyAction {
         System.out.println("GameManager.keyReleased()");
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    @Override public void actionPerformed(ActionEvent e) {
         if (isPlaying) {
             repaint();
             ball.update();
@@ -90,7 +96,7 @@ public class GameManager extends JPanel implements IKeyAction {
                 ball.y = paddle.y - Projectile.yOffset;
             }
             if (canva.intersect(ball)) {
-                ball.dispX = -ball.dispX;
+                scoreManager.onUpdate();
                 ball.dispY = -ball.dispY;
             }
 
@@ -117,7 +123,8 @@ public class GameManager extends JPanel implements IKeyAction {
         repaint(paddle.x, paddle.y, paddle.width, paddle.height);
     }
 
-    public void gameOver(Graphics g) {
+    public void onGameOver(Graphics g) {
+        isPlaying = false;
         final int yOffset = 50;
 
         g.setColor(Color.RED);

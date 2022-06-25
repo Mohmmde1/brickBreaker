@@ -5,12 +5,16 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 
 import java.util.Random;
+
+import game.Player;
+
 import java.io.IOException;
 
 public class Brick extends GameObject {
     private BrickTypes type;
     private final BrickTypes[] types = BrickTypes.values();
-    
+    private int hitScore = 0;
+
     // to keep attract of how many bricks have been created
     public static int countBricks = 0; 
     public boolean destroyed = false;
@@ -20,12 +24,15 @@ public class Brick extends GameObject {
         type = types[(new Random().nextInt(types.length))];
         countBricks++;
     }
-
+   
     /** OnHit event trigger */
-    void onHit(Projectile object) {
-        if (object != null) object.dispX = -object.dispX;
-        if (type.hits == 1) destroyed = true;
-        if (destroyed) return;
+    void onHit() {
+        hitScore += type.hits * 10;
+        if (type.hits == 1) {
+            destroyed = true;
+            Player.score += hitScore;
+            return;
+        } 
         else type = types[type.hits-2];
     }
 
