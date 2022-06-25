@@ -3,8 +3,11 @@ package game.components;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import org.json.simple.parser.ParseException;
+
 import game.Player;
 import game.Interfaces.IKeyAction;
+import network.Firebase;
 import utils.Config;
 
 import java.awt.Font;
@@ -16,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 import java.awt.Color;
 
 public class GameManager extends JPanel implements IKeyAction {
@@ -56,36 +60,36 @@ public class GameManager extends JPanel implements IKeyAction {
             movePaddle(Direction.LEFT);
 
         if (e.getKeyCode() == KeyEvent.VK_SPACE
-                || e.getKeyCode() == KeyEvent.VK_RIGHT
-                || e.getKeyCode() == KeyEvent.VK_LEFT
-                        && Projectile.isIdle) {
-            isPlaying = true;
-        }
+            || e.getKeyCode() == KeyEvent.VK_RIGHT
+            || e.getKeyCode() == KeyEvent.VK_LEFT
+            && Projectile.isIdle) { isPlaying = true; }
 
-        if (e.getKeyCode() == KeyEvent.VK_SPACE && Projectile.isIdle)
-            ball.randomize();
-        if (e.getKeyCode() == KeyEvent.VK_R && isPlaying==false)
-            restart();
-
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE && isPlaying==false) {
+        if (e.getKeyCode() == KeyEvent.VK_SPACE && Projectile.isIdle) ball.randomize();
+        
+        if (e.getKeyCode() == KeyEvent.VK_R && isPlaying==false) { 
+            if (Player.highestScore < Player.score) Player.highestScore = Player.score;
             try { 
-                if(Player.highestScore < Player.score) Player.highestScore = Player.score;
-
                 Config.updatePlayer(true);
-            } catch (FileNotFoundException e1) { e1.printStackTrace(); }
+                Firebase.uploadPlayerInfo();
+            } catch (InterruptedException | ExecutionException | IOException | ParseException e1) { e1.printStackTrace(); }
+            restart();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE && isPlaying) System.exit(1);
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE && !isPlaying) {
+            System.out.printf("here: score %d highest %d", Player.score, Player.highestScore);
+            if(Player.highestScore < Player.score) Player.highestScore = Player.score;
+            try { 
+                Config.updatePlayer(true);
+                Firebase.uploadPlayerInfo();
+            } catch (InterruptedException | ExecutionException | IOException | ParseException e1) { e1.printStackTrace(); }
             System.exit(1);
         }
         
         repaint();
     }
 
-    @Override public void keyTyped(KeyEvent e) {
-        System.out.println("GameManager.keyTyped()");
-    }
-
-    public void keyReleased(KeyEvent e) {
-        System.out.println("GameManager.keyReleased()");
-    }
+    @Override public void keyTyped(KeyEvent e) { System.out.println("GameManager.keyTyped()"); }
+    @Override public void keyReleased(KeyEvent e) { System.out.println("GameManager.keyReleased()"); }
 
     @Override public void actionPerformed(ActionEvent e) {
         if (isPlaying) {
@@ -99,7 +103,6 @@ public class GameManager extends JPanel implements IKeyAction {
                 scoreManager.onUpdate();
                 ball.dispY = -ball.dispY;
             }
-
             if (ball.x > getWidth() - (ball.width * 2) || ball.x <= 0) {
                 ball.dispX = -ball.dispX;
             } else if (ball.y <= 0 - ball.height) {
@@ -108,10 +111,8 @@ public class GameManager extends JPanel implements IKeyAction {
                 ball.bounce(paddle);
             } else if (ball.y > getHeight()) {
                 Projectile.isIdle = true;
-                if (scoreManager.getTrials().onUpdate())
-                    scoreManager.repaint();
-                else
-                    isPlaying = false;
+                if (scoreManager.getTrials().onUpdate()) scoreManager.repaint();
+                else isPlaying = false;
             }
             repaint();
         }

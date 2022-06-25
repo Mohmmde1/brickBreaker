@@ -40,7 +40,7 @@ public final class Config
         windowProps.put("title", "Brick Breaker");
         windowProps.put("width", 900);
         windowProps.put("height", 600);
-        windowProps.put("resizable", true);
+        windowProps.put("resizable", false);
         windowProps.put("visibility", true);
         windowProps.put("OnClose", EXIT_ON_CLOSE);
         
