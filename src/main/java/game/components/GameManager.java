@@ -164,7 +164,7 @@ public class GameManager extends JPanel implements IKeyAction {
     }
 
     public void onWin(Graphics g) {
-        g.setColor(Color.RED);
+        g.setColor(Color.GREEN);
         g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
         g.drawString("Congratulations!!!", getWidth() / 2 - 240, getHeight() / 2);
     }

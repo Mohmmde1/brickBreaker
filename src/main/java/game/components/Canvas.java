@@ -13,7 +13,7 @@ public class Canvas {
     private Vector<Brick> bricks = new Vector<Brick>();
     private int startX = 100;
     private int startY = 50;
-    private int tiles = 3;
+    private int tiles = 10;
     private int brickCount = 0;
     public Canvas() { generate(); }
 
