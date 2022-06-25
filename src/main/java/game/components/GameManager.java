@@ -150,13 +150,14 @@ public class GameManager extends JPanel implements IKeyAction {
 
     public void onEnd(Graphics g) {
         isPlaying = false;
+        
         final int yOffset = 50;
-
+        
         if (canva.equals(0))
-            onWin(g);
+        onWin(g);
         else
-            onLose(g);
-
+        onLose(g);
+        
         g.setColor(Color.BLACK);
         g.setFont(new Font(Font.MONOSPACED, Font.ITALIC, 20));
         g.drawString("Press R to try again", getWidth() / 2 - 110, getHeight() / 2 + yOffset);
@@ -164,6 +165,7 @@ public class GameManager extends JPanel implements IKeyAction {
     }
 
     public void onWin(Graphics g) {
+        Projectile.isIdle = true;
         g.setColor(Color.GREEN);
         g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 50));
         g.drawString("Congratulations!!!", getWidth() / 2 - 240, getHeight() / 2);
