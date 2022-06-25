@@ -14,8 +14,12 @@ public class Canvas {
     private int startX = 100;
     private int startY = 50;
     private int tiles = 10;
-
+    private int brickCount = 0;
     public Canvas() { generate(); }
+
+    public boolean equals(int brickCount) {
+        return this.brickCount == brickCount;
+    }
 
     /**
      * loops through bricks and checks if there is intersection
@@ -25,8 +29,10 @@ public class Canvas {
         for (Brick brick : bricks) {
             if (brick.intersects(projectile)) {
                 brick.onHit();
-                if (brick.destroyed)
+                if (brick.destroyed){
                     bricks.remove(brick);
+                    brickCount--;
+                }
                 return true;
             }
         }
@@ -54,6 +60,7 @@ public class Canvas {
                     new Point(startX + i * tileDim.width, startY + j * tileDim.height), 
                     new Dimension(tileDim.width, tileDim.height)
                 ));
+                brickCount++;
             }
         }
 
