@@ -3,6 +3,7 @@ package GUI;
 import static utils.Image.IMG_DIR;
 import game.Application;
 import game.Player;
+import game.Interfaces.IKeyAction;
 import network.Firebase;
 
 import java.io.IOException;
@@ -12,12 +13,13 @@ import org.json.simple.parser.ParseException;
 import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.Graphics;
-import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Color;
 
-public class Launcher extends Window 
+public class Launcher extends Window
 {
     public Launcher(Dimension dimension) {
         super("Brick Breaker Game Launcher", dimension, false, true, JFrame.EXIT_ON_CLOSE);
@@ -43,6 +45,20 @@ public class Launcher extends Window
         final Dimension bkgSize = new Dimension(425, 110);
         final Font font = new Font(Font.MONOSPACED, Font.BOLD, 18);
         
+        frame.addKeyListener(new IKeyAction() {
+            @Override public void keyTyped(KeyEvent e) {}
+            @Override public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    launchButton.requestFocusInWindow();
+                    launchButton.doClick();
+                }
+                if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    System.exit(1);
+                }
+            }
+            @Override public void keyReleased(KeyEvent e) {}
+            @Override public void actionPerformed(ActionEvent e) {}
+        });
         frame.setBounds(centerX, centerY, (int)dimension.getWidth(), (int)dimension.getHeight());
 
         mainPanel = new javax.swing.JPanel(){
@@ -52,6 +68,7 @@ public class Launcher extends Window
         };
 
         nickname = new javax.swing.JTextField();
+        nickname.requestFocusInWindow();
         labelName = new javax.swing.JLabel();
         buttonLabel = new javax.swing.JLabel();
         launchButton = new javax.swing.JButton();
@@ -130,7 +147,7 @@ public class Launcher extends Window
     }
     
     /**
-     *   This is the called to perform an action onSubmit
+     * This is the called to perform an action onSubmit
      * @throws ParseException
      * @throws IOException
      * @throws ExecutionException
