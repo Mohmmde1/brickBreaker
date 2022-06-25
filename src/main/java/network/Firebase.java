@@ -32,7 +32,7 @@ public class Firebase {
     public static boolean initialize() throws IOException, ParseException
     {
         try {
-            String filepath = Config.dotenv.get("BASE_DIR") + Config.dotenv.get("GOOGLE_APPLICATION_CREDENTIALS");
+            String filepath = (String)Config.dotenv.get("BASE_DIR") + Config.dotenv.get("GOOGLE_APPLICATION_CREDENTIALS");
 
             // Check connectivity
             URL url = new URL("http://www.google.com");
@@ -44,13 +44,20 @@ public class Firebase {
             FirebaseOptions options = new FirebaseOptions.Builder().setCredentials(GoogleCredentials.fromStream(serviceAccount)).build();
             FirebaseApp.initializeApp(options);
 
+            Player.connected = true;
+            System.out.println("connected");
+
             return true;
         } catch (IOException e) { 
-            final boolean exists = Config.playerInfo() != null;
-            Player.connected = false;
+            final boolean exists = Config.playerInfo().isEmpty() == false;
 
+            Player.connected = false;
+            System.out.println("not connected");
+
+            System.out.println(exists);
             if(exists) {
                 Player.uuid = (String) Config.playerInfo().get("uuid");
+                Player.highestScore = (int)(long) Config.playerInfo().get("highestScore");
                 Config.updatePlayer(exists); 
                 return false;
             }
@@ -71,6 +78,7 @@ public class Firebase {
         final boolean exists = Config.playerInfo() != null;
         if(exists) {
             Player.uuid = (String) Config.playerInfo().get("uuid");
+            Player.highestScore = (int)(long) Config.playerInfo().get("highestScore");
             Config.updatePlayer(exists); 
             document = Player.uuid;
             return;
