@@ -70,17 +70,16 @@ public class GameManager extends JPanel implements IKeyAction {
             if (Player.highestScore < Player.score) Player.highestScore = Player.score;
             try { 
                 Config.updatePlayer(true);
-                Firebase.uploadPlayerInfo();
+                if (Player.connected) Firebase.uploadPlayerInfo();
             } catch (InterruptedException | ExecutionException | IOException | ParseException e1) { e1.printStackTrace(); }
             restart();
         }
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE && isPlaying) System.exit(1);
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE && !isPlaying) {
-            System.out.printf("here: score %d highest %d", Player.score, Player.highestScore);
             if(Player.highestScore < Player.score) Player.highestScore = Player.score;
             try { 
                 Config.updatePlayer(true);
-                Firebase.uploadPlayerInfo();
+                if (Player.connected) Firebase.uploadPlayerInfo();
             } catch (InterruptedException | ExecutionException | IOException | ParseException e1) { e1.printStackTrace(); }
             System.exit(1);
         }

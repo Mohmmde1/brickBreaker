@@ -160,9 +160,8 @@ public final class Config
      * @throws ParseException
      */
     public final static Map<String, Object> playerInfo() throws FileNotFoundException, IOException, ParseException {
-        File file = new File((String)dotenv.get("BASE_DIR") + filename);
-        System.out.println(file.exists());
-        System.out.println((String)dotenv.get("BASE_DIR") + filename);
+        File file = new File(filename);
+        // System.out.println(file.exists());
         
         if (file.exists() == false) return new LinkedHashMap<String, Object>();;
         
