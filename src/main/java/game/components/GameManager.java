@@ -43,7 +43,7 @@ public class GameManager extends JPanel implements IKeyAction {
         super.paint(g2D);
 
         try {
-            if (scoreManager.getTrials().equals(0) | canva.equals(0)) {
+            if (scoreManager.getTrials().equals(0) || canva.equals(0)) {
                 onEnd(g2D);
             } else {
                 paddle.draw(g2D);
@@ -153,10 +153,8 @@ public class GameManager extends JPanel implements IKeyAction {
         
         final int yOffset = 50;
         
-        if (canva.equals(0))
-        onWin(g);
-        else
-        onLose(g);
+        if (canva.equals(0)) onWin(g);
+        else onLose(g);
         
         g.setColor(Color.BLACK);
         g.setFont(new Font(Font.MONOSPACED, Font.ITALIC, 20));
