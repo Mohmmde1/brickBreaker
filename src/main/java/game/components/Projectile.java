@@ -61,8 +61,7 @@ public class Projectile extends GameObject
      *            and this {@code Rectangle} intersect;
      *            {@code false} otherwise.
      */
-    @Override
-    public boolean intersects(Rectangle r) {
+    @Override public boolean intersects(Rectangle r) {
         int tw = this.width;
         int th = this.height;
         int rw = r.width;
